@@ -18,6 +18,31 @@ USE `playfinder`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `campo`
+--
+
+DROP TABLE IF EXISTS `campo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `campo` (
+  `idCampo` int(11) NOT NULL,
+  `via` varchar(45) NOT NULL,
+  `citta` varchar(45) NOT NULL,
+  `regione` varchar(45) NOT NULL,
+  PRIMARY KEY (`idCampo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `campo`
+--
+
+LOCK TABLES `campo` WRITE;
+/*!40000 ALTER TABLE `campo` DISABLE KEYS */;
+/*!40000 ALTER TABLE `campo` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `evento`
 --
 
@@ -35,10 +60,13 @@ CREATE TABLE `evento` (
   `squadra_nome` varchar(50) NOT NULL,
   `squadra_nome1` varchar(50) NOT NULL,
   `terminato` tinyint(1) NOT NULL DEFAULT '0',
+  `campo_idCampo` int(11) NOT NULL,
   PRIMARY KEY (`idEvento`),
   KEY `fk_evento_sport_idx` (`sport_nomeSport`),
   KEY `fk_evento_squadra1_idx` (`squadra_nome`),
   KEY `fk_evento_squadra2_idx` (`squadra_nome1`),
+  KEY `fk_campo_idCampo_idx` (`campo_idCampo`),
+  CONSTRAINT `fk_campo_idCampo` FOREIGN KEY (`campo_idCampo`) REFERENCES `campo` (`idCampo`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_evento_sport` FOREIGN KEY (`sport_nomeSport`) REFERENCES `sport` (`nomeSport`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_evento_squadra1` FOREIGN KEY (`squadra_nome`) REFERENCES `squadra` (`nome`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_evento_squadra2` FOREIGN KEY (`squadra_nome1`) REFERENCES `squadra` (`nome`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -143,4 +171,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-13 17:38:09
+-- Dump completed on 2017-12-18 15:51:03
