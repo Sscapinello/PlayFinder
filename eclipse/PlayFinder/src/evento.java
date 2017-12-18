@@ -7,6 +7,7 @@ public class evento {
 	private double durata;
 	private int nPartecipanti, idEvento, rCasa, rTrasferta;
 	private boolean terminato = false;
+	private int idCampo;
 	public String getSport() {
 		return sport;
 	}
@@ -66,5 +67,11 @@ public class evento {
 	}
 	public void setTerminato(boolean terminato) {
 		this.terminato = terminato;
+	}
+	public int getIdCampo() {
+		return idCampo;
+	}
+	public void setIdCampo(int idCampo) {
+		this.idCampo = idCampo;
 	}
 }
