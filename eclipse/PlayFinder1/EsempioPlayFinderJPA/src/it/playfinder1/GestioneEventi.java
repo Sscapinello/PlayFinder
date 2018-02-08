@@ -16,12 +16,14 @@ import it.playfinder.model.User;
 
 public class GestioneEventi {
 
-	public boolean creazioneEvento(Date data, Campo campo, Sport sport, int durata) {
+	public boolean creazioneEvento(Date data, Campo campo, Sport sport, int durata, User u) {
 		Evento e = new Evento();
 		e.setCampo(campo);
 		e.setDurata(durata);
 		e.setSport(sport);
 		e.setData(data);
+		u.setAmministratore(true);
+		u.setCapitano(true);
 		return true;
 
 	}
@@ -47,6 +49,9 @@ public class GestioneEventi {
 		s = em.find(Squadra.class, s.getNome());
 		Modulo m = s.getModulo(); 
 		User u = em.find(User.class, username);
+		if(rp.getUsers().size()==0) {
+			u.setCapitano(true);
+		}
 		int disponibiliModulo = 0;
 		for(GiocatoriRuolo gr : m.getGiocatoriruolo()) {
 			if(gr.getRuolo().equals(rp.getRuolo())) {
@@ -59,6 +64,17 @@ public class GestioneEventi {
 			em.getTransaction().begin();
 			rp.getUsers().add(u);
 			u.getRuoliPartite().add(rp);
+			return true;
+		}
+		return false;
+		
+	}
+	public boolean rimuoviEvento (Evento e, User u) {
+		EntityManager em = EntityFac.emf.createEntityManager();
+		e = em.find(Evento.class, e.getIdEvento());
+		if(u.isAmministratore()==true) {
+			em.getTransaction().begin();
+			em.remove(e);
 			return true;
 		}
 		return false;

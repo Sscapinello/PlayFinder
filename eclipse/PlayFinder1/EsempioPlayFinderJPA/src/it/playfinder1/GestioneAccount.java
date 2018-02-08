@@ -89,4 +89,13 @@ public class GestioneAccount {
 			return false;
 		}
 	}
+	public void rimuoviAmicizia(Amicizia amicizia) {
+		EntityManager em = EntityFac.emf.createEntityManager();
+		em.refresh(amicizia);
+		em.getTransaction().begin();
+		amicizia.setAccettata(false);
+		em.getTransaction().commit();
+
+	}
+	
 }

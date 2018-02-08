@@ -41,6 +41,9 @@ public class User implements Serializable {
 
 	private String telefono;
 	
+	private boolean amministratore = false;
+	
+	private boolean capitano = false;
 	
 	//bi-directional one to many association to RuoloPartita
 	@ManyToMany
@@ -173,6 +176,22 @@ public class User implements Serializable {
 
 	public void setAmicoDi(List<Amicizia> amicoDi) {
 		this.amicoDi = amicoDi;
+	}
+
+	public boolean isAmministratore() {
+		return amministratore;
+	}
+
+	public void setAmministratore(boolean amministratore) {
+		this.amministratore = amministratore;
+	}
+
+	public boolean isCapitano() {
+		return capitano;
+	}
+
+	public void setCapitano(boolean capitano) {
+		this.capitano = capitano;
 	}
 
 	
