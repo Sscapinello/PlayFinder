@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -21,8 +22,11 @@ public class Modulo implements Serializable {
 	@OneToMany(mappedBy="modulo")
 	private List<Squadra> squadras;	
 	
-	@OneToMany
+	@OneToMany(mappedBy = "modulo")
 	private List<GiocatoriRuolo> giocatoriruolo;
+	
+	@ManyToOne
+	private Sport sport;
 	
 	public List<Squadra> getSquadras() {
 		return this.squadras;

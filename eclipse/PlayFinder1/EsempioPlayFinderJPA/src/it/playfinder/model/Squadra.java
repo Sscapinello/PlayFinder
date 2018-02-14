@@ -37,7 +37,7 @@ public class Squadra implements Serializable {
 	@ManyToOne
 	private Modulo modulo;
 	
-	@OneToMany
+	@OneToMany(mappedBy="squadra")
 	private List<RuoloPartita> ruoli;
 
 

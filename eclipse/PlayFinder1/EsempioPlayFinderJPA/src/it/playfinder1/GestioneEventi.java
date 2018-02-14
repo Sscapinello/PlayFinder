@@ -29,7 +29,7 @@ public class GestioneEventi {
 	}
 
 	public boolean aggiungiRisultato(Evento e, int rCasa, int rTrasferta) {
-		EntityManager em = EntityFac.emf.createEntityManager();
+		EntityManager em = EntityFac.getInstance().getEm();
 		e = em.find(Evento.class, e.getIdEvento());
 		if (e.getTerminato()) {
 			e.setRCasa(rCasa);
@@ -44,7 +44,7 @@ public class GestioneEventi {
 	}
 	
 	public boolean partecipaEvento(Evento e, String username, Squadra s, RuoloPartita rp) {
-		EntityManager em = EntityFac.emf.createEntityManager();
+		EntityManager em = EntityFac.getInstance().getEm();
 		e = em.find(Evento.class, e.getIdEvento());
 		s = em.find(Squadra.class, s.getNome());
 		Modulo m = s.getModulo(); 
@@ -70,7 +70,7 @@ public class GestioneEventi {
 		
 	}
 	public boolean rimuoviEvento (Evento e, User u) {
-		EntityManager em = EntityFac.emf.createEntityManager();
+		EntityManager em = EntityFac.getInstance().getEm();
 		e = em.find(Evento.class, e.getIdEvento());
 		if(u.isAmministratore()==true) {
 			em.getTransaction().begin();

@@ -8,32 +8,30 @@ import it.playfinder.model.User;
 
 public class GestioneAccount {
 
-	public boolean login(String mailOrUsername, String password) {
-		EntityManager em = EntityFac.emf.createEntityManager();
-		User utente = em.find(User.class, mailOrUsername);
-		if (utente != null) {
-			return checkPassword(password, utente);
-		} else {
-			utente = userPerUsername(mailOrUsername, em);
-			if (utente != null) {
-				return checkPassword(password, utente);
-			}
+	public EsitoOperazione login(String username, String password) {
+		EsitoOperazione _return = new EsitoOperazione();
+		try {
+			EntityManager em = EntityFac.getInstance().getEm();
+		    User utente = em.find(User.class, username);
+		    boolean ok = utente != null && utente.getPassword().equals(password);
+			_return.setSuccess(ok);
+			_return.setMessaggio(!ok ? "Accesso fallito" : "Accesso effettuato");
+			if (ok)
+				_return.setOggettoRisultante(utente);
+			else
+				_return.setOggettoRisultante(null);
+		} catch (Exception ex) {
+			_return.setSuccess(false);
+			_return.setMessaggio("Qualcosa è andato male => " + ex.getMessage());
+			_return.setOggettoRisultante(ex);
 		}
-		return false;
+		return _return;
+		
 	}
 
-	public boolean registrazione(String email, String username, String password, String nome, String cognome,
+	public EsitoOperazione registrazione(String email, String username, String password, String nome, String cognome,
 			String citta, int eta, String regione, String telefono) {
-		EntityManager em = EntityFac.emf.createEntityManager();
-		User user = em.find(User.class, email);
-		if (user != null) {
-			return false;
-		} else {
-			user = userPerUsername(username, em);
-			if (user != null) {
-				return false;
-			}
-		}
+		EsitoOperazione _return = new EsitoOperazione();
 		User u = new User();
 		u.setCognome(cognome);
 		u.setCitta(citta);
@@ -44,17 +42,39 @@ public class GestioneAccount {
 		u.setRegione(regione);
 		u.setTelefono(telefono);
 		u.setUsername(username);
-
-		em.getTransaction().begin();
-		em.persist(u);
-		em.getTransaction().commit();
-
-		return true;
+		_return = registrazione(u);
+		return _return;
 
 	}
 	
+	public EsitoOperazione registrazione(User nuovoUtente) {
+		EsitoOperazione _return = new EsitoOperazione();
+		try {
+			EntityManager em = EntityFac.getInstance().getEm();
+			User u = em.find(User.class, nuovoUtente.getEmail());
+			if(u != null) {
+				_return.setSuccess(false);
+				_return.setMessaggio("L'utente esiste già");
+				_return.setOggettoRisultante(u);
+			} else {				
+				em.getTransaction().begin();
+				em.persist(nuovoUtente);
+				em.getTransaction().commit();
+				
+				_return.setSuccess(true);
+				_return.setMessaggio("Utente creato con successo");
+				_return.setOggettoRisultante(nuovoUtente);
+			}
+		} catch (Exception ex) {
+			_return.setSuccess(false);
+			_return.setMessaggio("Qualcosa è andato male => " + ex.getMessage());
+			_return.setOggettoRisultante(ex);
+		}
+		return _return;
+	}	
+	
 	public void aggiungiAmico(String usernameUtente, String usernameAmico) {
-		EntityManager em = EntityFac.emf.createEntityManager();
+		EntityManager em = EntityFac.getInstance().getEm();
 		User u = em.find(User.class, usernameUtente);
 		User amico = em.find(User.class, usernameAmico);
 		em.getTransaction().begin();
@@ -64,7 +84,7 @@ public class GestioneAccount {
 		em.getTransaction().commit();
 	}
 	public void accettaAmicizia(Amicizia amicizia) {
-		EntityManager em = EntityFac.emf.createEntityManager();
+		EntityManager em = EntityFac.getInstance().getEm();
 		em.refresh(amicizia);
 		em.getTransaction().begin();
 		amicizia.setAccettata(true);
@@ -82,15 +102,8 @@ public class GestioneAccount {
 		return utente;
 	}
 
-	private boolean checkPassword(String password, User user) {
-		if (user.getPassword().equals(password)) {
-			return true;
-		} else {
-			return false;
-		}
-	}
 	public void rimuoviAmicizia(Amicizia amicizia) {
-		EntityManager em = EntityFac.emf.createEntityManager();
+		EntityManager em = EntityFac.getInstance().getEm();
 		em.refresh(amicizia);
 		em.getTransaction().begin();
 		amicizia.setAccettata(false);
