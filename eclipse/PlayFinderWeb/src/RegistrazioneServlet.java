@@ -16,7 +16,7 @@ import it.playfinder1.GestioneAccount;
 /**
  * Servlet implementation class RegistrazioneServlet
  */
-@WebServlet("/RegistrazioneServlet")
+@WebServlet("/registrazione")
 public class RegistrazioneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private GestioneAccount ga = new GestioneAccount();
@@ -30,21 +30,27 @@ public class RegistrazioneServlet extends HttpServlet {
     }
 
 	/**
-	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
+	 * @see HttpServlet#doPostt(HttpServletRequest, HttpServletResponse)
 	 */
-	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String data = convertStreamToString(request.getInputStream());
-		User u = mapper.readValue(data, User.class);
-		EsitoOperazione eo = ga.registrazione(u);
+	protected void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String name = request.getParameter("first_name");
+		String surname = request.getParameter("last_name");
+		String anni = request.getParameter("eta");
+		String region = request.getParameter("regione");
+		String city = request.getParameter("citta");
+		String username = request.getParameter("user_name");
+		String password = request.getParameter("user_password");
+		String cpassword = request.getParameter("confirm_password");
+		String email = request.getParameter("email");
+		String phone = request.getParameter("contact_no");
+		int eta = Integer.parseInt(anni);
+		EsitoOperazione eo = ga.registrazione(email, username, password, name, surname,
+				city, eta, region, phone);
 		
-		String json = mapper.writeValueAsString(eo);
-		response.setContentType("application/json");
-		response.getWriter().append(json);
 	}
 
-	static String convertStreamToString(java.io.InputStream is) {
-	    java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
-	    return s.hasNext() ? s.next() : "";
-	}	}
+}
+
+	
 
 

@@ -3,7 +3,7 @@
 	<name>PlayFinderWeb</name>
 	<comment></comment>
 	<projects>
-		<project>EsempioPlayFinderJPA</project>
+		<project>PlayFinderJPA</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

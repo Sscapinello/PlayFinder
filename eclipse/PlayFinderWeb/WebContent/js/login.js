@@ -10,7 +10,6 @@ $('#btnLogin').click(function(e) {
 		console.log(esito);
 		if(esito.success) {
 			localStorage.setItem('utente', JSON.stringify(esito.oggettoRisultante));
-			// andare alla pagina areariservata
 			location.href ='https://www.google.it/';
 		} else {
 			$('#pnlErrLogin').show('fast').delay(2000).hide('fast');
