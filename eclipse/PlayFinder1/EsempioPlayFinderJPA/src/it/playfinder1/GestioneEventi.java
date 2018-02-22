@@ -1,9 +1,13 @@
 package it.playfinder1;
 
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.Query;
 
 import it.playfinder.model.Campo;
 import it.playfinder.model.Evento;
@@ -25,7 +29,26 @@ public class GestioneEventi {
 		u.setAmministratore(true);
 		u.setCapitano(true);
 		return true;
-
+	}
+	
+	public List<String> elencoSport() {
+		List<String> sport = new ArrayList<String>();
+		try {	
+			EntityManager em = EntityFac.getInstance().getEm();
+			Query query = em.createQuery("Select s.nomeSport FROM Sport s");
+			sport = query.getResultList();
+		} catch (NoResultException ex) {
+			ex.printStackTrace();
+		}
+		return sport;
+	}
+	
+	public void fineEvento(Evento e) {
+		if(e.getTerminato()==true) {
+			EntityManager em = EntityFac.getInstance().getEm();
+			
+			
+		}
 	}
 
 	public boolean aggiungiRisultato(Evento e, int rCasa, int rTrasferta) {
@@ -78,6 +101,5 @@ public class GestioneEventi {
 			return true;
 		}
 		return false;
-		
 	}
 }

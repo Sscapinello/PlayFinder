@@ -14,8 +14,7 @@ import javax.persistence.OneToMany;
 public class Modulo implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int nome;
+	private String nome;
 	private int nGiocatori;
 		
 	//bi-directional many-to-one association to Squadra
@@ -50,11 +49,11 @@ public class Modulo implements Serializable {
 		return squadra;
 	}
 
-	public int getNome() {
+	public String getNome() {
 		return nome;
 	}
 
-	public void setNome(int nome) {
+	public void setNome(String nome) {
 		this.nome = nome;
 	}
 

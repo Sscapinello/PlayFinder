@@ -7,9 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import it.playfinder.model.User;
 import it.playfinder1.EsitoOperazione;
 import it.playfinder1.GestioneAccount;
 
@@ -20,7 +17,6 @@ import it.playfinder1.GestioneAccount;
 public class RegistrazioneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private GestioneAccount ga = new GestioneAccount();
-	private ObjectMapper mapper = new ObjectMapper();
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -44,9 +40,14 @@ public class RegistrazioneServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String phone = request.getParameter("contact_no");
 		int eta = Integer.parseInt(anni);
-		EsitoOperazione eo = ga.registrazione(email, username, password, name, surname,
+		EsitoOperazione eo = new EsitoOperazione();
+		if (cpassword.equals(password)) {
+		eo = ga.registrazione(email, username, password, name, surname,
 				city, eta, region, phone);
-		
+		response.sendRedirect("http://www.google.com");  
+		} else {
+			eo.setSuccess(false);
+		}
 	}
 
 }

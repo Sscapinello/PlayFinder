@@ -24,6 +24,10 @@ public class Campo implements Serializable {
 
 	private String via;
 	
+	private int nCivico;
+	
+	
+
 	private String nTel;
 
 	//bi-directional many-to-one association to Evento
@@ -93,6 +97,13 @@ public class Campo implements Serializable {
 
 	public void setnTel(String nTel) {
 		this.nTel = nTel;
+	}
+	public int getnCivico() {
+		return nCivico;
+	}
+
+	public void setnCivico(int nCivico) {
+		this.nCivico = nCivico;
 	}
 
 }

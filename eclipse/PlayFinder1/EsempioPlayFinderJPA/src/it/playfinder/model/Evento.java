@@ -34,11 +34,16 @@ public class Evento implements Serializable {
 	private Date data;
 
 	private int durata;
-
+	
+	private String nome;
 
 	private int rCasa;
 
 	private int rTrasferta;
+	
+	private String password;
+
+	private boolean privato;
 
 	//bi-directional many-to-one association to Campo
 	@ManyToOne
@@ -104,7 +109,6 @@ public class Evento implements Serializable {
 	public boolean getTerminato() {
 		Instant instant = this.data.toInstant();
 		Instant fineEvento = instant.plus(durata, ChronoUnit.MINUTES);
-		
 		return fineEvento.isBefore(Instant.now());
 	}
 
@@ -138,6 +142,46 @@ public class Evento implements Serializable {
 
 	public void setSport(Sport sport) {
 		this.sport = sport;
+	}
+
+	public int getrCasa() {
+		return rCasa;
+	}
+
+	public void setrCasa(int rCasa) {
+		this.rCasa = rCasa;
+	}
+
+	public int getrTrasferta() {
+		return rTrasferta;
+	}
+
+	public void setrTrasferta(int rTrasferta) {
+		this.rTrasferta = rTrasferta;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public boolean isPrivato() {
+		return privato;
+	}
+
+	public void setPrivato(boolean privato) {
+		this.privato = privato;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 }

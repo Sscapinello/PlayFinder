@@ -41,6 +41,8 @@ public class User implements Serializable {
 
 	private String telefono;
 	
+	private String profilePicturePath;
+	
 	private boolean amministratore = false;
 	
 	private boolean capitano = false;
@@ -192,6 +194,14 @@ public class User implements Serializable {
 
 	public void setCapitano(boolean capitano) {
 		this.capitano = capitano;
+	}
+
+	public String getProfilePicturePath() {
+		return profilePicturePath;
+	}
+
+	public void setProfilePicturePath(String profilePicturePath) {
+		this.profilePicturePath = profilePicturePath;
 	}
 
 	

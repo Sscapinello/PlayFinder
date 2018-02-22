@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/playfinder.css">
+<link rel="stylesheet" href="css/profilo.css">
+
+<title>Profilo</title>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">PlayFinder</a>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+    </ul>
+  </div>
+</nav>
+<div class="container-fluid">
+   <div class="row">
+   	        <img src="rsc/ap3.jpg" id="imgProfilo" class="img-circle" width="200" height="200">
+     
+        <div class="tabs">
+    <!-- Radio button and lable for #tab-content1 -->
+    <input type="radio" name="tabs" id="tab1" checked >
+    <label for="tab1">
+        <i class="fa fa-html5"></i><span>Profilo</span>
+    </label>
+    <!-- Radio button and lable for #tab-content2 -->
+    <input type="radio" name="tabs" id="tab2">
+    <label for="tab2">
+        <i class="fa fa-css3"></i><span>Amici</span>
+    </label>
+    <!-- Radio button and lable for #tab-content3 -->
+    <input type="radio" name="tabs" id="tab3">
+    <label for="tab3">
+        <i class="fa fa-code"></i><span>Storico</span>
+    </label>
+    <div id="tab-content1" class="tab-content">
+        <h3>il mio profilo</h3>
+        <p><!-- Tab content here --></p>
+    </div> <!-- #tab-content1 -->
+    <div id="tab-content2" class="tab-content">
+        <h3>Storico</h3>
+        <p><!-- Tab content here --></p>
+    </div> <!-- #tab-content2 -->
+    <div id="tab-content3" class="tab-content">
+        <h3>Amici</h3>
+        <p><!-- Tab content here --></p>
+    </div> <!-- #tab-content3 -->
+</div>
+	</div>
+ </div>
+    
+</body>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/profilo.js"></script>
+
+</html>
