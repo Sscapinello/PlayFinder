@@ -12,6 +12,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 /**
  * The persistent class for the squadra database table.
@@ -23,14 +25,19 @@ public class Squadra implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int idSquadra;
+	
 	private String nome;
 
 	//bi-directional one-to-one association to Evento
 	@OneToOne(mappedBy="squadraCasa")
+	@JsonIgnore
 	private Evento eventoCasa;
 
 	//bi-directional one-to-one association to Evento
 	@OneToOne(mappedBy="squadraTrasferta")
+	@JsonIgnore
 	private Evento eventoTrasferta;
 
 	//bi-directional many-to-one association to Sport
@@ -39,6 +46,11 @@ public class Squadra implements Serializable {
 	
 	@OneToMany(mappedBy="squadra")
 	private List<RuoloPartita> ruoli;
+	
+	public Squadra creaSquadra(String nomeSquadra) {
+		this.setNome(nomeSquadra);
+		return this;
+	}
 
 
 	public Squadra() {

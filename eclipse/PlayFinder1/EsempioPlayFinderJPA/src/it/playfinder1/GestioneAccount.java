@@ -91,9 +91,10 @@ public class GestioneAccount {
 		em.getTransaction().commit();
 	}
 	
- 	private User userPerUsername(String username, EntityManager em) {
+ 	public User userPerUsername(String username) {
 		User utente = null;
 		try {
+			EntityManager em = EntityFac.getInstance().getEm();
 			utente = em.createQuery("select u from User u where u.username=:username", User.class)
 					.setParameter("username", username).getSingleResult();
 		} catch (NoResultException ex) {

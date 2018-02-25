@@ -5,7 +5,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/playfinder.css">
   <link rel="stylesheet" href="css/registrazione.css">
-  <link rel="stylesheet" href="css/evento.css">
+  <link rel="stylesheet" href="css/creaEvento.css">
 <title>Crea Evento</title>
   
 </head>
@@ -13,22 +13,16 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">PlayFinder</a>
+      <a class="navbar-brand" href="home.html">PlayFinder</a>
     </div>
     <ul class="nav navbar-nav navbar-right">
       <li>
       <form id="frmLogin" class="form-inline">
-	    <div class="form-group">
-	      <label class="lbl" for="email">Username:</label>
-	      <input type="text" class="form-control" id="email" placeholder="Enter username" name="username">
-	    </div>
-	    <div class="form-group">
-	      <label class="lbl" for="pwd">Password:</label>
-	      <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="password">
-	    </div>
-	  </form>
-    </li>
-      <li><a id="btnLogin"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+	      <label class="lbl" for="email" id= "username" name = "username"></label>
+	     
+	   </form>
+	  <li><a href = "relog.html" id = "btnLogout" display = "none"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+	    
     </ul>
   </div>
 </nav>
@@ -38,7 +32,9 @@
 	<div class="col-xl-3 col-lg-3 col-sm-0"></div>
 		<div class="col-xl-6 col-lg-6 col-sm-12 well">
 		    <form class="form-horizontal" id="event_form">
-				<div>
+		    
+		    		<input name="username" id="hdUsername" type="hidden">
+				
 					<!-- Form Name -->
 					<legend><center><h2 style = "color : #000000"><b>Crea il tuo Evento</b></h2></center></legend><br>
 		
@@ -60,14 +56,13 @@
 					  <div class="col-md-8 inputGroupContainer">
 						  <div class="input-group">
 							  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-							  <select  id="sport" name="sport" placeholder="Seleziona lo sport" class="form-control"  type="text">
-							   	  <option value="selezione">Seleziona Sport</option>
+							  <select  id="sport" name="nomeSport" placeholder="Seleziona lo sport" class="form-control"  type="text">
                               </select>
 						  </div>
 					  </div>
 					</div>
 					
-						<!-- Text input-->
+					<!-- Text input-->
 					<div class="form-group row">
 					  <label class="col-md-2 control-label" ></label> 
 					    <div class="col-md-5 inputGroupContainer">
@@ -78,7 +73,7 @@
 					  </div>
 					  <div class="col-md-3 inputGroupContainer">
 					      <div class="input-group">
-					       <input class="form-control" id="durata" placeholder="Durata (minuti)" type="number"></input>
+					       <input class="form-control" id="durata" placeholder="Durata (minuti)" type="number" name = "durata"></input>
 						  </div>
 					      
 					</div>
@@ -92,50 +87,44 @@
 					    <div class="input-group">
 					    
 					      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-					      <input id="autocomplete" placeholder="Indirizzo" onFocus="geolocate()" type="text" class="form-control">
+					      <input id="autocomplete" placeholder="Indirizzo" onFocus="geolocate()" type="text" class="form-control" >
 					      </div>
 					     </div>
 					     <div class="col-md-2 inputGroupContainer">
 					      <div class="input-group">
 					     
 							
-					      <input class="form-control" id="street_number" disabled="true" placeholder="N° Civ"></input>
+					      <input class="form-control" id="street_number" disabled="true" placeholder="N° Civ" name = "civico"></input>
 						  </div>
-						  <table id="address" style="display:none;">
-							  <tr>
-							    <td class="label">Street address</td>
-							    <td class="slimField"></td>
-							    <td class="wideField" colspan="2"><input class="field" id="route"
-							          disabled="true"></input></td>
-							  </tr>
-							  <tr>
-							    <td class="label">City</td>
-							    <!-- Note: Selection of address components in this example is typical.
-							         You may need to adjust it for the locations relevant to your app. See
-							         https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-addressform
-							    -->
-							    <td class="wideField" colspan="3"><input class="field" id="locality"
-							          disabled="true"></input></td>
-							  </tr>
-							  <tr>
-							    <td class="label">State</td>
-							    <td class="slimField"><input class="field"
-							          id="administrative_area_level_1" disabled="true"></input></td>
-							    <td class="label">Zip code</td>
-							    <td class="wideField"><input class="field" id="postal_code"
-							          disabled="true"></input></td>
-							  </tr>
-							  <tr>
-							    <td class="label">Country</td>
-							    <td class="wideField" colspan="3"><input class="field"
-							          id="country" disabled="true"></input></td>
-							  </tr>
-							</table>
+						  <div style="display:none;">
+							  <input class="field" id="route" name = "indirizzo"/>
+							  <input class="field" id="locality" name = "citta"/>
+							  <input class="field" id="administrative_area_level_1" name="regione"/>
+							  <input class="field" id="postal_code"/>
+							  <input class="field" id="country"/>
+							</div>
 					    </div>
 					  </div>
-					</div>
-	
-	       		
+					
+					
+					<div class="form-group row">
+					  <label class="col-md-2 control-label" ></label> 
+					  <div class="col-md-2 inputGroupContainer">
+						  <div class="form-check">
+						  <label class="form-check-label" for="defaultCheck1">Privato?</label>
+							  <input class="form-check-input" type="checkbox" value="true" id="defaultCheck1" name="privato">
+						   </div>
+					   </div>
+					    <div class="col-md-6 inputGroupContainer">
+					      <div class="input-group">
+					        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+					        <input class="form-control" id="password" placeholder="Password Evento" type="text" disabled="true" name = "password"></input>
+						  </div>
+					    </div>
+                    </div>
+					
+					
+				</form>	       		
 					<!-- Select Basic -->
 					
 					<!-- Success message -->
@@ -145,21 +134,21 @@
 					<div class="form-group">
 					  <label class="col-md-4 control-label"></label>
 					  <div class="col-md-4"><br>
-					    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<button id = "btnRegistrati" type="submit" class="btn btn-warning" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspSUBMIT <span class="glyphicon glyphicon-send"></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</button>
+					    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<button id = "btnRegistrati" type="submit" class="btn btn-warning" href = "home.html" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspSUBMIT <span class="glyphicon glyphicon-send"></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</button>
                      </div>
 					</div>
 		
 				</div>
-			</form>
+			
 		</div>
 	</div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="js/evento.js"></script>
+  <script src="js/creaEvento.js"></script>
   
  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACF0UBUMF1hrN0xCXmX3guH1GjgeblcTo&libraries=places&callback=initAutocomplete" async defer></script>
-  
+ <script src="js/playfinder.js"></script>
 <script src="js/maps.js"></script>
         
 </body>

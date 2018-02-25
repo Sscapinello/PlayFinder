@@ -44,7 +44,7 @@ public class RegistrazioneServlet extends HttpServlet {
 		if (cpassword.equals(password)) {
 		eo = ga.registrazione(email, username, password, name, surname,
 				city, eta, region, phone);
-		response.sendRedirect("http://www.google.com");  
+		response.sendRedirect("home.html");  
 		} else {
 			eo.setSuccess(false);
 		}

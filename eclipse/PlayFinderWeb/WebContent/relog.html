@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>PlayFinder</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/playfinder.css">
+  <link rel="stylesheet" href="css/registrazione.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">PlayFinder</a>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <li>
+      <form id="frmLogin" class="form-inline">
+	    <div class="form-group">
+	      <label class="lbl" for="email">Username:</label>
+	      <input type="text" class="form-control" id="email" placeholder="Enter username" name="username">
+	    </div>
+	    <div class="form-group">
+	      <label class="lbl" for="pwd">Password:</label>
+	      <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="password">
+	    </div>
+	  </form>
+    </li>
+      <li><a id = "btnLogin" href = "home.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
+  </div>
+</nav>
+  
+<div class="container-fluid">
+	<div class="row">
+	<div class="col-xl-10 col-lg-7 col-sm-0"></div>
+		<div class="col-xl-2 col-lg-5 col-sm-12">
+		    <form class="form-horizontal" action="registrazione" method="post"  id="contact_form">
+				<div>
+					<!-- Form Name -->
+					<legend><center><h2 style = "color : #ffffff"><b>Registration Form</b></h2></center></legend><br>
+		
+					<!-- Text input-->
+					<div class="form-group">
+					  <label class="col-md-2 control-label" ></label> 
+					  <div class="col-md-8 inputGroupContainer">
+						  <div class="input-group">
+							  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+							  <input  name="first_name" placeholder="First Name" class="form-control"  type="text">
+						  </div>
+					  </div>
+					</div>
+		
+					<!-- Text input-->
+					<div class="form-group">
+					  <label class="col-md-2 control-label" ></label> 
+					    <div class="col-md-8 inputGroupContainer">
+					    <div class="input-group">
+					  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+					  <input name="last_name" placeholder="Last Name" class="form-control"  type="text">
+					    </div>
+					  </div>
+					</div>
+					
+					<div class="form-group">
+					  <label class="col-md-2 control-label" ></label> 
+					  <div class="col-md-8 inputGroupContainer">
+						  <div class="input-group">
+							  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+							  <input  name="eta" placeholder="età" class="form-control"  type="text">
+						  </div>
+					  </div>
+					</div>
+					
+					
+					<!-- Text input-->
+					<div class="form-group">
+					  <label class="col-md-2 control-label" ></label> 
+					    <div class="col-md-8 inputGroupContainer">
+					    <div class="input-group">
+					  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+					  <input name="regione" placeholder="Region" class="form-control"  type="text">
+					    </div>
+					  </div>
+					</div>
+	
+	            	<!-- Text input-->
+					<div class="form-group">
+					  <label class="col-md-2 control-label" ></label> 
+					    <div class="col-md-8 inputGroupContainer">
+					    <div class="input-group">
+					  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+					  <input name="citta" placeholder="City" class="form-control"  type="text">
+					    </div>
+					  </div>
+					</div>
+	
+	
+					<!-- Text input-->
+					<div class="form-group">
+					  <label class="col-md-2 control-label"></label>  
+					  <div class="col-md-8 inputGroupContainer">
+					  <div class="input-group">
+					  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+					  <input  name="user_name" placeholder="Username" class="form-control"  type="text">
+					    </div>
+					  </div>
+					</div>
+		
+					<!-- Text input-->
+					<div class="form-group">
+					  <label class="col-md-2 control-label" ></label> 
+					    <div class="col-md-8 inputGroupContainer">
+					    <div class="input-group">
+					  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+					  <input name="user_password" placeholder="Password" class="form-control"  type="password">
+					    </div>
+					  </div>
+					</div>
+		
+					<!-- Text input-->
+					<div class="form-group">
+					  <label class="col-md-2 control-label" ></label> 
+					    <div class="col-md-8 inputGroupContainer">
+					    <div class="input-group">
+					  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+					  <input name="confirm_password" placeholder="Confirm Password" class="form-control"  type="password">
+					    </div>
+					  </div>
+					</div>
+		
+					<!-- Text input-->
+					<div class="form-group">
+					  <label class="col-md-2 control-label"></label>  
+					    <div class="col-md-8 inputGroupContainer">
+					    <div class="input-group">
+					        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+					  <input name="email" placeholder="E-Mail Address" class="form-control"  type="text">
+					    </div>
+					  </div>
+					</div>
+	
+					<!-- Text input-->
+					<div class="form-group">
+					  <label class="col-md-2 control-label"></label>  
+					    <div class="col-md-8 inputGroupContainer">
+					    <div class="input-group">
+					        <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+					  <input name="contact_no" placeholder="(+39)" class="form-control" type="text">
+					    </div>
+					  </div>
+					</div>
+		
+					<!-- Select Basic -->
+					
+					<!-- Success message -->
+					<div class="alert alert-success hide" role="alert" id="success_message">Success <i class="glyphicon glyphicon-thumbs-up"></i> Success!.</div>
+		
+					<!-- Button -->
+					<div class="form-group">
+					  <label class="col-md-4 control-label"></label>
+					  <div class="col-md-4"><br>
+					    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<button id = "btnRegistrati" type="submit" class="btn btn-warning" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspSUBMIT <span class="glyphicon glyphicon-send"></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</button>
+                     </div>
+					</div>
+		
+				</div>
+			</form>
+		</div>
+	</div>
+</div><!-- /.container -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="js/login.js"></script>
+</body>
+</html>

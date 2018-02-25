@@ -1,10 +1,12 @@
 package it.playfinder.model;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,6 +17,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 
 /**
@@ -25,6 +28,9 @@ import javax.persistence.TemporalType;
 @NamedQuery(name="Evento.findAll", query="SELECT e FROM Evento e")
 public class Evento implements Serializable {
 	private static final long serialVersionUID = 1L;
+	
+	@Transient
+	private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -46,23 +52,27 @@ public class Evento implements Serializable {
 	private boolean privato;
 
 	//bi-directional many-to-one association to Campo
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	private Campo campo;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	private Sport sport;
 
 	//bi-directional many-to-one association to Squadra
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="squadraCasa")
 	private Squadra squadraCasa;
 
 	//bi-directional many-to-one association to Squadra
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="squadraTrasferta")
 	private Squadra squadraTrasferta;
 
 	public Evento() {
+	}
+	
+	public String getDataStringa() {
+		return sdf.format(this.data);
 	}
 
 	public int getIdEvento() {

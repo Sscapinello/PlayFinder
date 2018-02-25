@@ -2,6 +2,9 @@ package it.playfinder.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 
@@ -21,6 +24,7 @@ public class Sport implements Serializable {
 	
 	//bi-directional many-to-one association to Evento
 	@OneToMany(mappedBy="sport")
+	@JsonIgnore
 	private List<Evento> eventos;
 
 

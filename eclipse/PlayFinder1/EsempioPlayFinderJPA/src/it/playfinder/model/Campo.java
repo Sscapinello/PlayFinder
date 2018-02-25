@@ -2,6 +2,9 @@ package it.playfinder.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 
@@ -24,14 +27,14 @@ public class Campo implements Serializable {
 
 	private String via;
 	
-	private int nCivico;
+	private String nCivico;
 	
 	
 
-	private String nTel;
 
 	//bi-directional many-to-one association to Evento
-	@OneToMany(mappedBy="campo")
+	@OneToMany(mappedBy="campo", cascade = CascadeType.PERSIST)
+	@JsonIgnore
 	private List<Evento> eventos;
 
 	public Campo() {
@@ -91,18 +94,11 @@ public class Campo implements Serializable {
 		return evento;
 	}
 
-	public String getnTel() {
-		return this.nTel;
-	}
-
-	public void setnTel(String nTel) {
-		this.nTel = nTel;
-	}
-	public int getnCivico() {
+	public String getnCivico() {
 		return nCivico;
 	}
 
-	public void setnCivico(int nCivico) {
+	public void setnCivico(String nCivico) {
 		this.nCivico = nCivico;
 	}
 

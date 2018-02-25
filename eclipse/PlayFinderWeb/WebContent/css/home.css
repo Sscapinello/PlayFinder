@@ -1,0 +1,36 @@
+body {
+    background-image: none;
+    background-color: highlight;
+}
+
+img {
+    display: block;
+	margin-left: auto;
+    margin-right: auto;
+    border:5px solid #9d9d9d;
+    
+}
+
+.evento{
+	border-color: black;
+}
+.margine{
+	border-style: groove;
+}
+.nEvento {
+	font-weight: bold;
+	font-size: 17px;
+	margin-top: 3px;
+	margin-bottom: 3px;
+	
+}
+.wrapper {
+    text-align: center;
+}
+
+#lista {
+    height: 400px;
+    overflow: scroll;
+    overflow: hidden;
+}
+

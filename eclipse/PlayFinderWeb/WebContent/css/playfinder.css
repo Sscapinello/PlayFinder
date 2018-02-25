@@ -11,6 +11,10 @@
 .lbl {
 	color: #9d9d9d;
 }
+#btnLogin {
+	cursor: pointer;
+}
+
 
 body {
     background-image: url("../rsc/ap4.jpg");

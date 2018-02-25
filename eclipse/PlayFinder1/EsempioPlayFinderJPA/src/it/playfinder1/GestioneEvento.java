@@ -18,17 +18,47 @@ import it.playfinder.model.Sport;
 import it.playfinder.model.Squadra;
 import it.playfinder.model.User;
 
-public class GestioneEventi {
+public class GestioneEvento {
 
-	public boolean creazioneEvento(Date data, Campo campo, Sport sport, int durata, User u) {
+	public Evento creazioneEvento(String name, Date data, Campo campo, Sport sport, int durata, User u) {
+		EntityManager em = EntityFac.getInstance().getEm();
+		em.getTransaction().begin();
+		Squadra casa = new Squadra();
+		Squadra trasferta = new Squadra();
 		Evento e = new Evento();
 		e.setCampo(campo);
 		e.setDurata(durata);
-		e.setSport(sport);
+		e.setSport(em.find(Sport.class, sport.getNomeSport()));
 		e.setData(data);
+		e.setNome(name);
+		u = em.find(User.class, u.getUsername());
 		u.setAmministratore(true);
 		u.setCapitano(true);
-		return true;
+		casa.creaSquadra("Team 1");
+		trasferta.creaSquadra("Team 2");
+		e.setSquadraCasa(casa);
+		e.setSquadraTrasferta(trasferta);
+		em.persist(e);
+		em.getTransaction().commit();
+
+		return e;
+	}
+	public Evento creazioneEvento(String name, Date data, Campo campo, Sport sport, int durata, User u, String password) {
+		EntityManager em = EntityFac.getInstance().getEm();
+		Evento e = new Evento();
+		e.setCampo(campo);
+		e.setDurata(durata);
+		e.setSport(em.find(Sport.class, sport.getNomeSport()));
+		e.setData(data);
+		e.setNome(name);
+		e.setPassword(password);
+		u.setAmministratore(true);
+		u.setCapitano(true);
+		em.getTransaction().begin();
+		em.persist(e);
+		em.getTransaction().commit();
+
+		return e;
 	}
 	
 	public List<String> elencoSport() {
@@ -42,6 +72,20 @@ public class GestioneEventi {
 		}
 		return sport;
 	}
+	public List<Evento> elencoEventi() {
+		List<Evento> eventi = new ArrayList<Evento>();
+		try {	
+			EntityManager em = EntityFac.getInstance().getEm();
+			Query query = em.createQuery("Select e FROM Evento e");
+			eventi = query.getResultList();
+		} catch (NoResultException ex) {
+			ex.printStackTrace();
+		}
+		return eventi;
+	}
+
+	
+	
 	
 	public void fineEvento(Evento e) {
 		if(e.getTerminato()==true) {
@@ -102,4 +146,18 @@ public class GestioneEventi {
 		}
 		return false;
 	}
+
+public Sport sportPerNome(String nomeSport) {
+	Sport sport = null;
+	try {
+		EntityManager em = EntityFac.getInstance().getEm();
+		sport = em.createQuery("select s from Sport s where s.nomeSport=:nomeSport", Sport.class)
+				.setParameter("nomeSport", nomeSport).getSingleResult();
+	} catch (NoResultException ex) {
+		ex.printStackTrace();
+	}
+	return sport;
+}
+
+
 }
