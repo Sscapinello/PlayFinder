@@ -14,7 +14,7 @@
     <div class="navbar-header">
       <a class="navbar-brand" href="home.html">PlayFinder</a>
     </div>
-    <ul class="nav navbar-nav navbar-right">
+    <ul class="nav navbar-nav navbar-right" id ="nav">
     </ul>
   </div>
 </nav>
@@ -23,6 +23,9 @@
    	        <img src="rsc/ap3.jpg" id="imgProfilo" class="img-circle" width="200" height="200">
      
         <div class="tabs">
+    
+    <input name="username" id="hdUsername" type="hidden">
+        
     <!-- Radio button and lable for #tab-content1 -->
     <input type="radio" name="tabs" id="tab1" checked >
     <label for="tab1">
@@ -37,6 +40,7 @@
     <input type="radio" name="tabs" id="tab3">
     <label for="tab3">
         <i class="fa fa-code"></i><span>Storico</span>
+         <div class="form-group" id="lista" ></div>
     </label>
     <div id="tab-content1" class="tab-content">
         <h3>il mio profilo</h3>
@@ -56,6 +60,7 @@
     
 </body>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/playfinder.js"></script>
 <script src="js/profilo.js"></script>
 
 </html>

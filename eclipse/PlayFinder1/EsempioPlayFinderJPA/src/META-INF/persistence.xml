@@ -11,6 +11,7 @@
 		<class>it.playfinder.model.GiocatoriRuolo</class>
 		<class>it.playfinder.model.RuoloPartita</class>
 		<class>it.playfinder.model.Amicizia</class>
+		<class>it.playfinder.model.UserInEvento</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/playfinder"/>
 			<property name="javax.persistence.jdbc.user" value="root"/>

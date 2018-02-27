@@ -1,6 +1,7 @@
 package it.playfinder.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -69,6 +70,13 @@ public class Squadra implements Serializable {
 	}
 
 	public void setModulo(Modulo modulo) {
+		String sport = modulo.getSport().getNomeSport();
+		if(sport.equals("Calcio a 7")|| sport.equals("Calcio a 11")) {
+			List<GiocatoriRuolo> portieri = new ArrayList();
+			List<GiocatoriRuolo> difensori = new ArrayList();
+			List<GiocatoriRuolo> centrocampisti = new ArrayList();
+			List<GiocatoriRuolo> attaccanti = new ArrayList();
+		}
 		this.modulo = modulo;
 	}
 
@@ -110,5 +118,16 @@ public class Squadra implements Serializable {
 
 		return ruoloPartita;
 	}	
+	
+	public List<User> componenti(Squadra s){
+		List<User> componenti = new ArrayList();
+		for(RuoloPartita rp : s.getRuoli()) {
+			RuoloPartita x = rp;
+			for(User u : rp.getUsers()) {
+				componenti.add(u);
+			}
+		}
+		return componenti;
+	}
 
 }

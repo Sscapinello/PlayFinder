@@ -9,7 +9,6 @@
 	</classpathentry>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/PlayFinderJPA"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/EclipseLink 2.5.2">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
@@ -41,5 +40,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry exported="true" kind="lib" path="C:/Users/alema/Desktop/apache-tomcat-9.0.5/apache-tomcat-9.0.5/lib/servlet-api.jar"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/PlayFinderJPA"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

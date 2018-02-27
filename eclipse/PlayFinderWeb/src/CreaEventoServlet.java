@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
@@ -20,10 +19,10 @@ import it.playfinder.model.Campo;
 import it.playfinder.model.Evento;
 import it.playfinder.model.Sport;
 import it.playfinder.model.User;
-import it.playfinder1.EsitoOperazione;
 import it.playfinder1.GestioneAccount;
 import it.playfinder1.GestioneCampo;
 import it.playfinder1.GestioneEvento;
+
 
 /**
  * Servlet implementation class CreaEventoServlet

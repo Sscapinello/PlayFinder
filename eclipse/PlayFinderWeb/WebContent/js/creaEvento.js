@@ -1,8 +1,6 @@
 $(function() {
 	$.ajax({
-		url: 'creaEvento',
-		method: 'get'
-	})
+ 	})
 	.done(function(sports) {
 		$('#sport').empty();
 		var select = '<option> Seleziona Sport </option>' ;

@@ -1,10 +1,17 @@
 package it.playfinder1;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 
 import it.playfinder.model.Amicizia;
+import it.playfinder.model.Evento;
 import it.playfinder.model.User;
+import it.playfinder.model.UserInEvento;
+import it.playfinder1.GestioneEvento;
+;
 
 public class GestioneAccount {
 
@@ -112,4 +119,17 @@ public class GestioneAccount {
 
 	}
 	
+	public List<Evento> storico(User u){
+		GestioneEvento ge = new GestioneEvento();
+		UserInEvento ue = null;
+		List<Evento> e = ge.elencoEventi();
+		List<Evento> storico = new ArrayList();
+		for(Evento evento : e) {
+			if(evento.getTerminato()==true) {
+				ue.haPartecipato(u, evento);
+				storico.add(evento);
+			}
+		}
+		return storico;
+	}
 }

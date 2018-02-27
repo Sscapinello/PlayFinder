@@ -48,6 +48,7 @@ public class Modulo implements Serializable {
 
 		return squadra;
 	}
+	
 
 	public String getNome() {
 		return nome;
@@ -71,5 +72,13 @@ public class Modulo implements Serializable {
 
 	public void setGiocatoriruolo(List<GiocatoriRuolo> giocatoriruolo) {
 		this.giocatoriruolo = giocatoriruolo;
+	}
+
+	public Sport getSport() {
+		return sport;
+	}
+
+	public void setSport(Sport sport) {
+		this.sport = sport;
 	}	
 }

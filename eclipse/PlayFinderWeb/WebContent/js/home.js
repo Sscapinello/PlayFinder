@@ -13,9 +13,7 @@ $(function() {
 								',' + evento.campo.citta + ',' + evento.campo.via + ',' + 
 								evento.campo.nCivico +
 								'</p><p class="col-md-2 evento">' + evento.dataStringa + '</p></div></div></div>';
-			console.log(evento);
-
-			$('#lista').append(option);
+            $('#lista').append(option);
 		});
 	});
 });

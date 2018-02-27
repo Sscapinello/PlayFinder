@@ -6,11 +6,14 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+
+import it.playfinder1.EntityFac;
 
 
 /**
@@ -43,9 +46,6 @@ public class User implements Serializable {
 	
 	private String profilePicturePath;
 	
-	private boolean amministratore = false;
-	
-	private boolean capitano = false;
 	
 	//bi-directional one to many association to RuoloPartita
 	@ManyToMany
@@ -56,6 +56,9 @@ public class User implements Serializable {
 	
 	@OneToMany(mappedBy = "utente1", cascade=CascadeType.ALL)
 	private List<Amicizia> amicoDi;
+	
+	@OneToMany(mappedBy = "user")
+	private List<UserInEvento> ac;
 	
 	public User() {
 	}
@@ -180,21 +183,6 @@ public class User implements Serializable {
 		this.amicoDi = amicoDi;
 	}
 
-	public boolean isAmministratore() {
-		return amministratore;
-	}
-
-	public void setAmministratore(boolean amministratore) {
-		this.amministratore = amministratore;
-	}
-
-	public boolean isCapitano() {
-		return capitano;
-	}
-
-	public void setCapitano(boolean capitano) {
-		this.capitano = capitano;
-	}
 
 	public String getProfilePicturePath() {
 		return profilePicturePath;
@@ -203,6 +191,7 @@ public class User implements Serializable {
 	public void setProfilePicturePath(String profilePicturePath) {
 		this.profilePicturePath = profilePicturePath;
 	}
+	
 
 	
 }

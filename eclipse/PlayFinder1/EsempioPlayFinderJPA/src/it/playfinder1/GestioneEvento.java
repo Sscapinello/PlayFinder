@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
+import it.playfinder.model.UserInEvento;
 import it.playfinder.model.Campo;
 import it.playfinder.model.Evento;
 import it.playfinder.model.GiocatoriRuolo;
@@ -26,25 +27,34 @@ public class GestioneEvento {
 		Squadra casa = new Squadra();
 		Squadra trasferta = new Squadra();
 		Evento e = new Evento();
+		Modulo m = moduloDefault(sport);
 		e.setCampo(campo);
 		e.setDurata(durata);
 		e.setSport(em.find(Sport.class, sport.getNomeSport()));
 		e.setData(data);
 		e.setNome(name);
 		u = em.find(User.class, u.getUsername());
-		u.setAmministratore(true);
-		u.setCapitano(true);
 		casa.creaSquadra("Team 1");
 		trasferta.creaSquadra("Team 2");
 		e.setSquadraCasa(casa);
 		e.setSquadraTrasferta(trasferta);
+		casa.setModulo(m);
+		trasferta.setModulo(m);
+		UserInEvento a = new UserInEvento();
+		a.nuovoPartecipante(u, e);
+		a.setAmministratore(true);
+		a.setCapitano(true);
 		em.persist(e);
+		em.persist(a);
 		em.getTransaction().commit();
 
 		return e;
 	}
 	public Evento creazioneEvento(String name, Date data, Campo campo, Sport sport, int durata, User u, String password) {
 		EntityManager em = EntityFac.getInstance().getEm();
+		em.getTransaction().begin();
+		Squadra casa = new Squadra();
+		Squadra trasferta = new Squadra();
 		Evento e = new Evento();
 		e.setCampo(campo);
 		e.setDurata(durata);
@@ -52,9 +62,15 @@ public class GestioneEvento {
 		e.setData(data);
 		e.setNome(name);
 		e.setPassword(password);
-		u.setAmministratore(true);
-		u.setCapitano(true);
-		em.getTransaction().begin();
+		u = em.find(User.class, u.getUsername());
+		casa.creaSquadra("Team 1");
+		trasferta.creaSquadra("Team 2");
+		e.setSquadraCasa(casa);
+		e.setSquadraTrasferta(trasferta);
+		UserInEvento a = new UserInEvento();
+		a.setAmministratore(true);
+		a.setCapitano(true);
+		a.nuovoPartecipante(u, e);
 		em.persist(e);
 		em.getTransaction().commit();
 
@@ -116,8 +132,10 @@ public class GestioneEvento {
 		s = em.find(Squadra.class, s.getNome());
 		Modulo m = s.getModulo(); 
 		User u = em.find(User.class, username);
+		UserInEvento ac = new UserInEvento();
+		ac.nuovoPartecipante(u, e);
 		if(rp.getUsers().size()==0) {
-			u.setCapitano(true);
+			ac.setCapitano(true);
 		}
 		int disponibiliModulo = 0;
 		for(GiocatoriRuolo gr : m.getGiocatoriruolo()) {
@@ -134,12 +152,31 @@ public class GestioneEvento {
 			return true;
 		}
 		return false;
-		
+	
 	}
+
+	
+	
+	public Modulo moduloDefault(Sport sport) {
+		Modulo m = null;
+		EntityManager em = EntityFac.getInstance().getEm();
+		if(sport.getNomeSport().equals("Calcio a 5")) {
+			m = em.createQuery("select m from Modulo m where m.nome='3-1'", Modulo.class).getSingleResult();
+		}if(sport.getNomeSport().equals("Calcio a 7")) {
+			m = em.createQuery("select m from Modulo m where m.nome='1-4-1'", Modulo.class).getSingleResult();
+		}if(sport.getNomeSport().equals("Calcio a 11")){
+			m = em.createQuery("select m from Modulo m where m.nome='4-4-2'", Modulo.class).getSingleResult();
+		}
+		return m;
+	}
+	
 	public boolean rimuoviEvento (Evento e, User u) {
 		EntityManager em = EntityFac.getInstance().getEm();
 		e = em.find(Evento.class, e.getIdEvento());
-		if(u.isAmministratore()==true) {
+		u = em.find(User.class, u.getUsername());
+		UserInEvento ue = null;
+		ue = ue.haPartecipato(u, e);
+		if(ue.isAmministratore()==true) {
 			em.getTransaction().begin();
 			em.remove(e);
 			return true;
