@@ -53,7 +53,6 @@ public class Evento implements Serializable {
 
 	private boolean privato;
 
-	//bi-directional many-to-one association to Campo
 	@ManyToOne(cascade=CascadeType.ALL)
 	private Campo campo;
 	
@@ -63,12 +62,10 @@ public class Evento implements Serializable {
 	@ManyToOne(cascade=CascadeType.ALL)
 	private Sport sport;
 
-	//bi-directional many-to-one association to Squadra
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="squadraCasa")
 	private Squadra squadraCasa;
 
-	//bi-directional many-to-one association to Squadra
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="squadraTrasferta")
 	private Squadra squadraTrasferta;

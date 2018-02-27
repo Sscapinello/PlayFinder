@@ -3,12 +3,16 @@ package it.playfinder.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Modulo implements Serializable {
@@ -19,6 +23,7 @@ public class Modulo implements Serializable {
 		
 	//bi-directional many-to-one association to Squadra
 	@OneToMany(mappedBy="modulo")
+	@JsonIgnore
 	private List<Squadra> squadras;	
 	
 	@OneToMany(mappedBy = "modulo")

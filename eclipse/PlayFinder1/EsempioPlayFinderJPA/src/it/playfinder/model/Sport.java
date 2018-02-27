@@ -29,6 +29,7 @@ public class Sport implements Serializable {
 
 
 	@OneToMany(mappedBy = "sport")
+	@JsonIgnore
 	private List<Modulo> modulo;
 
 	public Sport() {

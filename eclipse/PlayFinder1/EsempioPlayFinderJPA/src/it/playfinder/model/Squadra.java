@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -31,17 +32,14 @@ public class Squadra implements Serializable {
 	
 	private String nome;
 
-	//bi-directional one-to-one association to Evento
 	@OneToOne(mappedBy="squadraCasa")
 	@JsonIgnore
 	private Evento eventoCasa;
 
-	//bi-directional one-to-one association to Evento
 	@OneToOne(mappedBy="squadraTrasferta")
 	@JsonIgnore
 	private Evento eventoTrasferta;
 
-	//bi-directional many-to-one association to Sport
 	@ManyToOne
 	private Modulo modulo;
 	
@@ -70,13 +68,6 @@ public class Squadra implements Serializable {
 	}
 
 	public void setModulo(Modulo modulo) {
-		String sport = modulo.getSport().getNomeSport();
-		if(sport.equals("Calcio a 7")|| sport.equals("Calcio a 11")) {
-			List<GiocatoriRuolo> portieri = new ArrayList();
-			List<GiocatoriRuolo> difensori = new ArrayList();
-			List<GiocatoriRuolo> centrocampisti = new ArrayList();
-			List<GiocatoriRuolo> attaccanti = new ArrayList();
-		}
 		this.modulo = modulo;
 	}
 

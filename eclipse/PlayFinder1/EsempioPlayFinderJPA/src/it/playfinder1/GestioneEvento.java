@@ -88,6 +88,7 @@ public class GestioneEvento {
 		}
 		return sport;
 	}
+	
 	public List<Evento> elencoEventi() {
 		List<Evento> eventi = new ArrayList<Evento>();
 		try {	

@@ -3,15 +3,6 @@ $(function() {
 		url: 'profilo',
 		method: 'get'
 	})
-	.done(function(utente) {
-		$('#imgProfilo').attr('src', utente.profilePicturePath);
-	});
-});
-$(function() {
-	$.ajax({
-		url: 'profilo',
-		method: 'get'
-	})
 	.done(function(storico) {
 		$.each(storico, function(i, evento) {
 			var option = '<div class="form-group"><label class="col-md-1 control-label" ></label><div class="col-md-10 inputGroupContainer"><div class="row input-group margine"><span class="input-group-addon"><i class="fas fa-futbol"></i></span><a id="evento" class="col-md-5 evento nEvento" href="evento.html">' 
