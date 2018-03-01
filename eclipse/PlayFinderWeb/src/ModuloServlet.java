@@ -1,6 +1,9 @@
 
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,19 +13,25 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import it.playfinder.model.Evento;
+import it.playfinder.model.Modulo;
 import it.playfinder.model.Squadra;
+import it.playfinder.model.User;
+import it.playfinder.model.UserInEvento;
+import it.playfinder1.GestioneAccount;
+import it.playfinder1.GestioneEvento;
 
 /**
- * Servlet implementation class EventoServlet
+ * Servlet implementation class ModuloServlet
  */
-@WebServlet("/EventoServlet")
-public class EventoServlet extends HttpServlet {
+@WebServlet("/moduli")
+public class ModuloServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+       GestioneAccount ga = new GestioneAccount();
+       GestioneEvento ge = new GestioneEvento();
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EventoServlet() {
+    public ModuloServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,12 +41,20 @@ public class EventoServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Evento e = null;
-		Squadra casa = e.getSquadraCasa();
-		Squadra trasferta = e.getSquadraTrasferta();
+		String username = request.getParameter("username");
+		String id = request.getParameter("hdIdEvento");
+		int idEvento = Integer.parseInt(id);
+		UserInEvento u = null;
+		u = u.partecipa(username, idEvento);
+		e = ge.eventoPerId(idEvento);
+		List<Modulo> moduli =ge.selezionaModulo(e);
+		List<String> nomeModuli = new ArrayList();
+		for(Modulo m : moduli) {
+			nomeModuli.add(m.getNome());
+		}
 		ObjectMapper m = new ObjectMapper();
 		response.setContentType("application/json");
-		response.getWriter().append(m.writeValueAsString(casa));
-		response.getWriter().append(m.writeValueAsString(trasferta));
+		response.getWriter().append(m.writeValueAsString(nomeModuli));
 
 	}
 

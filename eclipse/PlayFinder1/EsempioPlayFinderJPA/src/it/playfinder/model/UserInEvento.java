@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NoResultException;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import it.playfinder1.EntityFac;
 
 @Entity
@@ -20,10 +22,12 @@ public class UserInEvento {
 
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="username")
+	@JsonIgnore
 	private User user;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="idEvento")
+	@JsonIgnore
 	private Evento evento;
 	
 	private boolean amministratore = false;
@@ -40,10 +44,8 @@ public class UserInEvento {
 		return id;
 	}
 	
-	public UserInEvento haPartecipato(User u, Evento e) {
+	public UserInEvento partecipa(String username, int idEvento) {
 		UserInEvento ac = null;
-		String username = u.getUsername();
-		int idEvento = e.getIdEvento();
 		try {
 			EntityManager em = EntityFac.getInstance().getEm();
 			ac = em.createQuery("select ue from UserInEvento ue where ue.username=:username and ue.idEvento=:idEvento", UserInEvento.class)

@@ -126,7 +126,7 @@ public class GestioneAccount {
 		List<Evento> storico = new ArrayList();
 		for(Evento evento : e) {
 			if(evento.getTerminato()==true) {
-				ue.haPartecipato(u, evento);
+				ue.partecipa(u.getUsername(), evento.getIdEvento());
 				storico.add(evento);
 			}
 		}

@@ -121,4 +121,14 @@ public class Squadra implements Serializable {
 		return componenti;
 	}
 
+
+	public int getIdSquadra() {
+		return idSquadra;
+	}
+
+
+	public void setIdSquadra(int idSquadra) {
+		this.idSquadra = idSquadra;
+	}
+
 }

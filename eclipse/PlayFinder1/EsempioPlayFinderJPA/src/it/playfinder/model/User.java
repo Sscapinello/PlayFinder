@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import it.playfinder1.EntityFac;
 
 
@@ -49,6 +51,7 @@ public class User implements Serializable {
 	
 	//bi-directional one to many association to RuoloPartita
 	@ManyToMany
+	@JsonIgnore
 	private List<RuoloPartita> ruoliPartite;
 	
 	@OneToMany(mappedBy = "utente2", cascade=CascadeType.ALL)
@@ -190,6 +193,14 @@ public class User implements Serializable {
 
 	public void setProfilePicturePath(String profilePicturePath) {
 		this.profilePicturePath = profilePicturePath;
+	}
+
+	public List<UserInEvento> getAc() {
+		return ac;
+	}
+
+	public void setAc(List<UserInEvento> ac) {
+		this.ac = ac;
 	}
 	
 

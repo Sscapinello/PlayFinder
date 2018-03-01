@@ -1,33 +1,23 @@
 
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import it.playfinder.model.Evento;
-import it.playfinder1.GestioneEvento;
-
 /**
- * Servlet implementation class HomeServlet
+ * Servlet implementation class Evento
  */
-@WebServlet("/home")
-public class HomeServlet extends HttpServlet {
+@WebServlet("/Evento")
+public class Evento extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	GestioneEvento ge = new GestioneEvento();
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public HomeServlet() {
+    public Evento() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,22 +26,15 @@ public class HomeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Evento> elencoEventi = ge.elencoEventi();
-		List<Evento> eventi = new ArrayList();
-		for(Evento e : elencoEventi) {
-			if(e.getIniziato()!=true) {
-			eventi.add(e);
-			}
-		}
-		ObjectMapper m = new ObjectMapper();
-		response.setContentType("application/json");
-		response.getWriter().append(m.writeValueAsString(eventi));
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String ruoloPartita = request.getParameter("rp");
 	}
 
 }

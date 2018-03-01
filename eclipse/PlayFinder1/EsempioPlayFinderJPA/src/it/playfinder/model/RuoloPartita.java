@@ -2,6 +2,9 @@ package it.playfinder.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 @Entity
@@ -16,6 +19,7 @@ public class RuoloPartita implements Serializable {
 	private Ruolo ruolo;
 	
 	@ManyToOne
+	@JsonIgnore
 	private Squadra squadra;
 
 	@ManyToMany(mappedBy="ruoliPartite")

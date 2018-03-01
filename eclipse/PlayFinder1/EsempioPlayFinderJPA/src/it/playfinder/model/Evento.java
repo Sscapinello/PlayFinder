@@ -21,6 +21,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 /**
  * The persistent class for the evento database table.
@@ -123,6 +125,11 @@ public class Evento implements Serializable {
 		Instant fineEvento = instant.plus(durata, ChronoUnit.MINUTES);
 		return fineEvento.isBefore(Instant.now());
 	}
+	public boolean getIniziato() {
+		Instant instant = this.data.toInstant();
+		return instant.isBefore(Instant.now());
+	}
+
 
 	public Campo getCampo() {
 		return this.campo;
@@ -194,6 +201,14 @@ public class Evento implements Serializable {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public List<UserInEvento> getAc() {
+		return ac;
+	}
+
+	public void setAc(List<UserInEvento> ac) {
+		this.ac = ac;
 	}
 
 }

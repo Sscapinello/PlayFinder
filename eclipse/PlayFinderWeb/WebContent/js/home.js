@@ -1,12 +1,20 @@
+var eventi;
+var evento = localStorage.getItem('evento');
+if (evento) {
+	localStorage.removeItem('evento');
+}
 $(function() {
 	$.ajax({
 		url: 'home',
 		method: 'get'
 	})
-	.done(function(eventi) {
-		console.log(eventi);
+	.done(function(rispostaEventi) {
+		console.log(rispostaEventi);
+		eventi = rispostaEventi;
 		$.each(eventi, function(i, evento) {
-			var option = '<div class="form-group"><label class="col-md-1 control-label" ></label><div class="col-md-10 inputGroupContainer"><div class="row input-group margine"><span class="input-group-addon"><i class="fas fa-futbol"></i></span><a id="evento" class="col-md-5 evento nEvento" href="evento.html">' 
+			var option = '<div class="form-group"><label class="col-md-1 control-label" ></label><div class="col-md-10 inputGroupContainer">' +
+			'<div class="row input-group margine"><span class="input-group-addon"><i class="fas fa-futbol"></i></span>' + 
+			'<a data-idxevento="' + i + '" class="col-md-5 evento nEvento linkEvento" href="evento.html">' 
 				                 + evento.nome + '</a><p align = "right" class="col-md-7 evento">' + evento.squadraCasa.nome + '-' + evento.squadraTrasferta.nome +
 				                '</p><p class="col-md-5 evento">' + evento.sport.nomeSport + 
 								'&nbsp&nbsp&nbsp&nbspDurata:' + evento.durata + '\'' + 
@@ -16,5 +24,7 @@ $(function() {
 								'</p><p class="col-md-2 evento">' + evento.dataStringa + '</p></div></div></div>';
             $('#listaEventi').append(option);
 		});
+		$('.linkEvento').click(function(e) {localStorage.setItem('evento', JSON.stringify(eventi[$(this).data('idxevento')]));});
 	});
+
 });

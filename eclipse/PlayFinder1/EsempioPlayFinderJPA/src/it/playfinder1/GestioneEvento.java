@@ -44,6 +44,14 @@ public class GestioneEvento {
 		a.nuovoPartecipante(u, e);
 		a.setAmministratore(true);
 		a.setCapitano(true);
+		List<RuoloPartita> x = settaModulo(m, casa);
+		List<RuoloPartita> y = settaModulo(m, trasferta);
+		for(RuoloPartita r : x) {
+			em.persist(r);
+        }
+		for(RuoloPartita r : y) {
+			em.persist(r);
+        }
 		em.persist(e);
 		em.persist(a);
 		em.getTransaction().commit();
@@ -104,13 +112,7 @@ public class GestioneEvento {
 	
 	
 	
-	public void fineEvento(Evento e) {
-		if(e.getTerminato()==true) {
-			EntityManager em = EntityFac.getInstance().getEm();
-			
-			
-		}
-	}
+	
 
 	public boolean aggiungiRisultato(Evento e, int rCasa, int rTrasferta) {
 		EntityManager em = EntityFac.getInstance().getEm();
@@ -122,7 +124,7 @@ public class GestioneEvento {
 		}
 		return false;
 	}
-	public List<Modulo> moduliEvento(Evento e) {
+	public List<Modulo> selezionaModulo(Evento e) {
 		Sport s = e.getSport();
 		return s.getModulo();
 	}
@@ -171,12 +173,27 @@ public class GestioneEvento {
 		return m;
 	}
 	
+	public List<RuoloPartita> settaModulo(Modulo m, Squadra s){
+		EntityManager em = EntityFac.getInstance().getEm();
+		em.getTransaction().begin();
+		List<RuoloPartita> rp = new ArrayList();
+		List<GiocatoriRuolo> ge = m.getGiocatoriruolo();
+		for(GiocatoriRuolo gr : ge) {
+			RuoloPartita r = new RuoloPartita();
+			r.setRuolo(gr.getRuolo());
+			r.setSquadra(s);
+			rp.add(r);
+		}
+		return rp;
+		
+	}
+	
 	public boolean rimuoviEvento (Evento e, User u) {
 		EntityManager em = EntityFac.getInstance().getEm();
 		e = em.find(Evento.class, e.getIdEvento());
 		u = em.find(User.class, u.getUsername());
 		UserInEvento ue = null;
-		ue = ue.haPartecipato(u, e);
+		ue = ue.partecipa(u.getUsername(), e.getIdEvento());
 		if(ue.isAmministratore()==true) {
 			em.getTransaction().begin();
 			em.remove(e);
@@ -195,6 +212,16 @@ public Sport sportPerNome(String nomeSport) {
 		ex.printStackTrace();
 	}
 	return sport;
+}
+public Evento eventoPerId(int idEvento) {
+	Evento e = null;
+	try {
+		EntityManager em = EntityFac.getInstance().getEm();
+		e = em.find(Evento.class, idEvento);
+	} catch (NoResultException ex) {
+		ex.printStackTrace();
+	}
+	return e;
 }
 
 

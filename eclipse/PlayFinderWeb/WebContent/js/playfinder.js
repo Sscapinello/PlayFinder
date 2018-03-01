@@ -1,7 +1,7 @@
 var utente = localStorage.getItem('utente');
 if (utente) {
 	utente = JSON.parse(utente);
-	var option = '<li><form id="frmLogin" class="form-inline"><label class="lbl" for="email" id= "username" name = "username" style="margin-top: 7px; font-size: 16px;"></label></form><li><a href = "relog.html" id = "btnLogout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>'
+	var option = '<li><form id="frmLogin" class="form-inline"><a id = "btnLogin" href= "profilo.html"><label class="lbl" for="email" id= "username" name = "username" style="margin-top: 7px; font-size: 16px;"></label></a></form><li><a href = "relog.html" id = "btnLogout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>'
 	$('#nav').append(option);
 	$('#username').html(utente.username);
 	$('#hdUsername').val(utente.username);
