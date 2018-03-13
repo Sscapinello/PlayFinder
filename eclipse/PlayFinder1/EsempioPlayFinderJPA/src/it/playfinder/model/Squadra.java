@@ -5,16 +5,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.NoResultException;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import it.playfinder1.EntityFac;
 
 
 /**
@@ -130,5 +134,8 @@ public class Squadra implements Serializable {
 	public void setIdSquadra(int idSquadra) {
 		this.idSquadra = idSquadra;
 	}
+ 	
+	
+
 
 }

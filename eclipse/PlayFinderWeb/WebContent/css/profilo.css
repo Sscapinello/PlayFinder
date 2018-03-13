@@ -107,3 +107,20 @@ img {
     margin: 10px auto;
     }
 }
+.risultato{
+}
+.margine{
+	border-style: groove;
+}
+.nEvento {
+	font-weight: bold;
+	font-size: 17px;
+	margin-top: 3px;
+	margin-bottom: 3px;
+	
+}
+
+.form-evento{
+	    border: 5px solid red;
+	
+}

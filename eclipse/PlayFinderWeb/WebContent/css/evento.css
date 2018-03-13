@@ -11,10 +11,14 @@ img {
     
 }
 
-.btnSquadra{
+.btnSquadra, .btnS{
 	
 	padding: 10px 90px;
     font-size: 18px;
     line-height: 1.3333333;
     border-radius: 6px;
+}
+
+.my-group .form-control{
+	width: 100%;
 }

@@ -7,15 +7,16 @@ import it.playfinder.model.Modulo;
 
 public class GestioneModulo {
 
-	public Modulo selezionaModulo(String Nome, EntityManager em) {
-		
+	public Modulo selezionaModulo(String nome) {
+		EntityManager em = EntityFac.getInstance().getEm();
 			Modulo modulo = null;
 			try {
-				modulo = em.createQuery("select u from Modulo u where u.Nome=:Nome", Modulo.class)
-						.setParameter("nome", Nome).getSingleResult();
+				modulo = em.createQuery("select u from Modulo u where u.nome=:nome", Modulo.class)
+						.setParameter("nome", nome).getSingleResult();
 			} catch (NoResultException ex) {
 				ex.printStackTrace();
 			}
 			return modulo;
 		}
+	
 }

@@ -10,8 +10,7 @@ import it.playfinder.model.Amicizia;
 import it.playfinder.model.Evento;
 import it.playfinder.model.User;
 import it.playfinder.model.UserInEvento;
-import it.playfinder1.GestioneEvento;
-;
+import it.playfinder1.GestioneEvento;;
 
 public class GestioneAccount {
 
@@ -19,8 +18,8 @@ public class GestioneAccount {
 		EsitoOperazione _return = new EsitoOperazione();
 		try {
 			EntityManager em = EntityFac.getInstance().getEm();
-		    User utente = em.find(User.class, username);
-		    boolean ok = utente != null && utente.getPassword().equals(password);
+			User utente = em.find(User.class, username);
+			boolean ok = utente != null && utente.getPassword().equals(password);
 			_return.setSuccess(ok);
 			_return.setMessaggio(!ok ? "Accesso fallito" : "Accesso effettuato");
 			if (ok)
@@ -33,7 +32,7 @@ public class GestioneAccount {
 			_return.setOggettoRisultante(ex);
 		}
 		return _return;
-		
+
 	}
 
 	public EsitoOperazione registrazione(String email, String username, String password, String nome, String cognome,
@@ -53,21 +52,21 @@ public class GestioneAccount {
 		return _return;
 
 	}
-	
+
 	public EsitoOperazione registrazione(User nuovoUtente) {
 		EsitoOperazione _return = new EsitoOperazione();
 		try {
 			EntityManager em = EntityFac.getInstance().getEm();
 			User u = em.find(User.class, nuovoUtente.getEmail());
-			if(u != null) {
+			if (u != null) {
 				_return.setSuccess(false);
 				_return.setMessaggio("L'utente esiste già");
 				_return.setOggettoRisultante(u);
-			} else {				
+			} else {
 				em.getTransaction().begin();
 				em.persist(nuovoUtente);
 				em.getTransaction().commit();
-				
+
 				_return.setSuccess(true);
 				_return.setMessaggio("Utente creato con successo");
 				_return.setOggettoRisultante(nuovoUtente);
@@ -78,18 +77,19 @@ public class GestioneAccount {
 			_return.setOggettoRisultante(ex);
 		}
 		return _return;
-	}	
-	
+	}
+
 	public void aggiungiAmico(String usernameUtente, String usernameAmico) {
 		EntityManager em = EntityFac.getInstance().getEm();
 		User u = em.find(User.class, usernameUtente);
 		User amico = em.find(User.class, usernameAmico);
 		em.getTransaction().begin();
 		if (u != null && amico != null) {
-			u.addAmico(amico, false);		
+			u.addAmico(amico, false);
 		}
 		em.getTransaction().commit();
 	}
+
 	public void accettaAmicizia(Amicizia amicizia) {
 		EntityManager em = EntityFac.getInstance().getEm();
 		em.refresh(amicizia);
@@ -97,8 +97,8 @@ public class GestioneAccount {
 		amicizia.setAccettata(true);
 		em.getTransaction().commit();
 	}
-	
- 	public User userPerUsername(String username) {
+
+	public User userPerUsername(String username) {
 		User utente = null;
 		try {
 			EntityManager em = EntityFac.getInstance().getEm();
@@ -118,15 +118,14 @@ public class GestioneAccount {
 		em.getTransaction().commit();
 
 	}
-	
-	public List<Evento> storico(User u){
+
+	public List<Evento> storico(User u) {
 		GestioneEvento ge = new GestioneEvento();
 		UserInEvento ue = null;
 		List<Evento> e = ge.elencoEventi();
 		List<Evento> storico = new ArrayList();
-		for(Evento evento : e) {
-			if(evento.getTerminato()==true) {
-				ue.partecipa(u.getUsername(), evento.getIdEvento());
+		for (Evento evento : e) {
+			if (evento.getEsito() != null && ge.partecipa(u.getUsername(), evento.getIdEvento()) != null) {
 				storico.add(evento);
 			}
 		}

@@ -20,12 +20,12 @@ public class UserInEvento {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="username")
 	@JsonIgnore
 	private User user;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="idEvento")
 	@JsonIgnore
 	private Evento evento;
@@ -33,6 +33,7 @@ public class UserInEvento {
 	private boolean amministratore = false;
 	
 	private boolean capitano = false;
+	
 
 	public UserInEvento nuovoPartecipante(User u, Evento e) {
 		this.setEvento(e);
@@ -44,19 +45,7 @@ public class UserInEvento {
 		return id;
 	}
 	
-	public UserInEvento partecipa(String username, int idEvento) {
-		UserInEvento ac = null;
-		try {
-			EntityManager em = EntityFac.getInstance().getEm();
-			ac = em.createQuery("select ue from UserInEvento ue where ue.username=:username and ue.idEvento=:idEvento", UserInEvento.class)
-					.getSingleResult();
-		} catch (NoResultException ex) {
-			ex.printStackTrace();
-		}
-		return ac;
-	}
-
-
+	
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -92,6 +81,8 @@ public class UserInEvento {
 	public void setCapitano(boolean capitano) {
 		this.capitano = capitano;
 	}
+
+	
 
 
 

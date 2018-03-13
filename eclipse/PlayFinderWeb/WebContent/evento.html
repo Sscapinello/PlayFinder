@@ -25,19 +25,32 @@
 		<div class="col-xl-6 col-lg-10 col-sm-12 well">
 				    
 				    
-				    		<input name="hdIdEvento" id="hdIdEvento" type="hidden"></input>
+				    
 		    
 		    
 		    <form class="form-horizontal" id="event_form">
+		    		                    <input name="idev" id="idev" type="hidden"></input>
+		    				    		<input name="idCasa" id="idCasa" type="hidden"></input>
+		    				    		<input name="idTrasferta" id="idTrasferta" type="hidden"></input>
+		    						    <input name="rp" id="rp"type="hidden"></input>
 		    	<legend><center><h2 style = "color : #000000" id = "nomeEvento" name = "nomeEvento" ><b></b></h2></center></legend><br>
-						 <div class="form-group col-xl-6 col-lg-6 col-sm-12" id="squadracasa" >
 						 
+						 <div class="form-group col-xl-6 col-lg-6 col-sm-12 my-group" id="sc" >
+						 <input style="margin-top: 16px;" class="form-control" placeholder="Inserisci un nome per la squadra" id = "nomeCasa">
+						 <center><h3 id = "nCasa"></h3></center>
+						 <div class="form-group col-xl-6 col-lg-6 col-sm-12" id="squadracasa"></div>
+						 <div class="form-group col-xl-6 col-lg-8 col-sm-12" id="btncasa"></div>
                         </div>
-						 <div class="form-group col-xl-6 col-lg-6 col-sm-12"" id="squadratrasferta" align="right" >
+						 <div class="form-group col-xl-6 col-lg-6 col-sm-12 my-group" style="float : left" id="st">
+						  <input style="margin-top: 16px;" class="form-control" placeholder="Inserisci un nome per la squadra" id = "nomeTrasferta">
+						  <center><h3 id = "nTrasferta"></h3></center>
+						   <div class="form-group col-xl-6 col-lg-6 col-sm-12" id="squadratrasferta"></div>
+						 <div class="form-group col-xl-6 col-lg-8 col-sm-12" id="btntrasferta"></div>
 						 
                         </div>
                         
 		    </form>
+		    
 		</div>
      </div>
   </div>

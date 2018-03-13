@@ -13,25 +13,26 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import it.playfinder.model.Evento;
-import it.playfinder.model.Modulo;
-import it.playfinder.model.Squadra;
 import it.playfinder.model.User;
 import it.playfinder.model.UserInEvento;
 import it.playfinder1.GestioneAccount;
 import it.playfinder1.GestioneEvento;
 
 /**
- * Servlet implementation class ModuloServlet
+ * Servlet implementation class RisultatiServlet
  */
-@WebServlet("/moduli")
-public class ModuloServlet extends HttpServlet {
+@WebServlet("/risultati")
+public class RisultatiServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       GestioneAccount ga = new GestioneAccount();
-       GestioneEvento ge = new GestioneEvento();
+	
+	GestioneEvento ge = new GestioneEvento();
+	GestioneAccount ga = new GestioneAccount();
+
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ModuloServlet() {
+    public RisultatiServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,24 +41,20 @@ public class ModuloServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		// TODO Auto-generated method stub
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id = request.getParameter("idEvento");
-		int idEvento = Integer.parseInt(id);
-		Evento e = ge.eventoPerId(idEvento);
-		List<Modulo> moduli =ge.selezionaModulo(e);
-		List<String> nomeModuli = new ArrayList();
-		for(Modulo m : moduli) {
-			nomeModuli.add(m.getNome());
-		}
+		String username = request.getParameter("name");
+		User u = ga.userPerUsername(username);
+		List<Evento> eventi = ge.eventiDaAggiornare(u);
 		ObjectMapper m = new ObjectMapper();
 		response.setContentType("application/json");
-		response.getWriter().append(m.writeValueAsString(nomeModuli));
+		response.getWriter().append(m.writeValueAsString(eventi));
+		
 	}
 
 }

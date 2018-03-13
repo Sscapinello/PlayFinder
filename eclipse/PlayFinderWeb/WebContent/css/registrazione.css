@@ -1,5 +1,15 @@
-#success_message{ display: none;}
 
 legend {
 	border-bottom: 0;
 }
+.regi{
+	position: absolute; 
+	display: none;
+    background-color: bisque;
+    margin-left: 500px;
+    padding: 10px;
+    width: 20%;
+    text-align: center;
+    border: 2px solid red;
+    border-radius: 5px;
+    	}

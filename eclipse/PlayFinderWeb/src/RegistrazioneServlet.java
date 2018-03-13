@@ -1,6 +1,8 @@
 
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,11 +43,12 @@ public class RegistrazioneServlet extends HttpServlet {
 		String phone = request.getParameter("contact_no");
 		int eta = Integer.parseInt(anni);
 		EsitoOperazione eo = new EsitoOperazione();
+		if(name!= null && surname != null && username != null && password != null) {
 		if (cpassword.equals(password)) {
 		eo = ga.registrazione(email, username, password, name, surname,
 				city, eta, region, phone);
-		response.sendRedirect("home.html");  
-		} else {
+		response.sendRedirect("relog.html?registration=ok");
+		}} else {
 			eo.setSuccess(false);
 		}
 	}

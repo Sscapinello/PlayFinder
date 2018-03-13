@@ -1,7 +1,6 @@
 
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -14,50 +13,41 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import it.playfinder.model.Evento;
 import it.playfinder.model.Modulo;
+import it.playfinder.model.RuoloPartita;
 import it.playfinder.model.Squadra;
-import it.playfinder.model.User;
-import it.playfinder.model.UserInEvento;
-import it.playfinder1.GestioneAccount;
 import it.playfinder1.GestioneEvento;
+import it.playfinder1.GestioneModulo;
 
 /**
- * Servlet implementation class ModuloServlet
+ * Servlet implementation class ModuloCasaServlet
  */
-@WebServlet("/moduli")
-public class ModuloServlet extends HttpServlet {
+@WebServlet("/moduloCasa")
+public class ModuloCasaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       GestioneAccount ga = new GestioneAccount();
-       GestioneEvento ge = new GestioneEvento();
+	GestioneModulo gm = new GestioneModulo();
+    GestioneEvento ge = new GestioneEvento();
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ModuloServlet() {
+    public ModuloCasaServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-	}
-
-	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String nomeModulo = request.getParameter("nomeModulo");
+		String nomeSquadra = request.getParameter("nomeSquadra");
 		String id = request.getParameter("idEvento");
 		int idEvento = Integer.parseInt(id);
 		Evento e = ge.eventoPerId(idEvento);
-		List<Modulo> moduli =ge.selezionaModulo(e);
-		List<String> nomeModuli = new ArrayList();
-		for(Modulo m : moduli) {
-			nomeModuli.add(m.getNome());
-		}
-		ObjectMapper m = new ObjectMapper();
-		response.setContentType("application/json");
-		response.getWriter().append(m.writeValueAsString(nomeModuli));
+		Modulo m = gm.selezionaModulo(nomeModulo);
+		Squadra casa = e.getSquadraCasa();
+		casa.setModulo(m);
+		ge.settaRuoloPartita(m, casa, nomeSquadra);
+		response.sendRedirect("evento.html?");
 	}
 
 }

@@ -16,17 +16,16 @@ import it.playfinder.model.User;
 import it.playfinder1.GestioneAccount;
 
 /**
- * Servlet implementation class ProfiloServlet
+ * Servlet implementation class StoricoServlet
  */
-@WebServlet("/profilo")
-public class ProfiloServlet extends HttpServlet {
+@WebServlet("/storico")
+public class StoricoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	GestioneAccount ga = new GestioneAccount();
-
+       GestioneAccount ga = new GestioneAccount();
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProfiloServlet() {
+    public StoricoServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,21 +34,19 @@ public class ProfiloServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String username = request.getParameter("username");
-		User u = ga.userPerUsername(username);
-		List<Evento> storico = ga.storico(u);
-		ObjectMapper m = new ObjectMapper();
-		response.setContentType("application/json");
-		response.getWriter().append(m.writeValueAsString(storico));
-
+		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		String username = request.getParameter("name");
+		User user = ga.userPerUsername(username);
+		List<Evento> storico = ga.storico(user);
+		ObjectMapper m = new ObjectMapper();
+		response.setContentType("application/json");
+		response.getWriter().append(m.writeValueAsString(storico));
 	}
 
 }

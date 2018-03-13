@@ -61,7 +61,7 @@ public class User implements Serializable {
 	private List<Amicizia> amicoDi;
 	
 	@OneToMany(mappedBy = "user")
-	private List<UserInEvento> ac;
+	private List<UserInEvento> userInEvento;
 	
 	public User() {
 	}
@@ -195,12 +195,12 @@ public class User implements Serializable {
 		this.profilePicturePath = profilePicturePath;
 	}
 
-	public List<UserInEvento> getAc() {
-		return ac;
+	public List<UserInEvento> getUserInEvento() {
+		return userInEvento;
 	}
 
-	public void setAc(List<UserInEvento> ac) {
-		this.ac = ac;
+	public void setUserInEvento(List<UserInEvento> userInEvento) {
+		this.userInEvento = userInEvento;
 	}
 	
 

@@ -9,12 +9,14 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.NoResultException;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -22,6 +24,8 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import it.playfinder1.EntityFac;
 
 
 /**
@@ -54,14 +58,16 @@ public class Evento implements Serializable {
 	private String password;
 
 	private boolean privato;
+	
+	private String esito;
 
 	@ManyToOne(cascade=CascadeType.ALL)
 	private Campo campo;
 	
 	@OneToMany(mappedBy = "evento")
-	private List<UserInEvento> ac;
+	private List<UserInEvento> userInEvento;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	private Sport sport;
 
 	@OneToOne(cascade=CascadeType.ALL)
@@ -203,12 +209,34 @@ public class Evento implements Serializable {
 		this.nome = nome;
 	}
 
-	public List<UserInEvento> getAc() {
-		return ac;
+	public List<UserInEvento> getUserInEvento() {
+		return userInEvento;
 	}
 
 	public void setAc(List<UserInEvento> ac) {
-		this.ac = ac;
+		this.userInEvento = ac;
 	}
+
+	public String getEsito() {
+		return esito;
+	}
+
+	public void setEsito() {
+		String esito = null;
+		if(rCasa > rTrasferta) {
+			esito = "1" ;
+		}else if (rCasa == rTrasferta) {
+			esito = "X";
+		}else if(rCasa < rTrasferta) {
+			esito = "2";
+		}
+		this.esito = esito;
+	}
+
+	public void setUserInEvento(List<UserInEvento> userInEvento) {
+		this.userInEvento = userInEvento;
+	}
+	
+ 	
 
 }

@@ -5,9 +5,12 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import it.playfinder1.EntityFac;
+
 import java.util.List;
 
 @Entity
+@Cacheable(false)
 public class RuoloPartita implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -56,6 +59,7 @@ public class RuoloPartita implements Serializable {
 	public void setRuolo(Ruolo ruolo) {
 		this.ruolo = ruolo;
 	}
+	
 
 
 }

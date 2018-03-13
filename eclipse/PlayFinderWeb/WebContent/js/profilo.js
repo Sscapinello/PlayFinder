@@ -1,19 +1,34 @@
+var user = localStorage.getItem('utente');
+u = JSON.parse(user);
+
 $(function() {
+	var x  = {}
+	x.name = u.username
 	$.ajax({
-		url: 'profilo',
-		method: 'get'
+		url: 'storico',
+		method: 'post',
+		data : x
 	})
 	.done(function(storico) {
-		$.each(storico, function(i, evento) {
-			var option = '<div class="form-group"><label class="col-md-1 control-label" ></label><div class="col-md-10 inputGroupContainer"><div class="row input-group margine"><span class="input-group-addon"><i class="fas fa-futbol"></i></span><a id="evento" class="col-md-5 evento nEvento" href="evento.html">' 
-				                 + evento.nome + '</a><p align = "right" class="col-md-7 evento">' + evento.squadraCasa.nome + '&nbsp' + evento.rCasa + '-' + evento.rTrasferta + 'nbsp' + evento.squadraTrasferta.nome +
-				                '</p><p class="col-md-5 evento">' + evento.sport.nomeSport + 
-								'&nbsp&nbsp&nbsp&nbspDurata:' + evento.durata + '\'' + 
-								'</p><p align = "right" class="col-md-5 evento">' + evento.campo.regione + 
-								',' + evento.campo.citta + ',' + evento.campo.via + ',' + 
-								evento.campo.nCivico +
-								'</p><p class="col-md-2 evento">' + evento.dataStringa + '</p></div></div></div>';
-            $('#lista').append(option);
+		eventi = storico;
+		$.each(eventi, function(i, evento) {
+			var option = '<li class="form-group">'+
+							'<div class="col-md-12 inputGroupContainer form-evento">' +
+									'<input type="hidden" name="idEvento" value="'+evento.idEvento+'"></input>'+
+									'<a data-idxevento="'+i+'" class="col-md-12 evento nEvento linkEvento" align="center" href="evento.html?='+ evento.idEvento +'">' + evento.nome + '</a>'+
+									'<div align = "right" class="col-md-6 evento">' +
+									   '<div class="col-md-10 evento">' + evento.squadraCasa.nome +'</div>'+ 
+									   '<div type="text" class="col-md-1" name="rCasa">'+evento.rCasa+'</div>'+
+									'</div>'+				                    
+								    '<div align = "left" class="col-md-6 evento">' +
+				                           '<div type="text" class="col-md-1" name="rTrasferta">'+evento.rTrasferta+'</div>' +
+				                           '<div class="col-md-10 evento">'+ evento.squadraTrasferta.nome + '</div>' +
+						            '</div>'+
+						            '<p class="col-md-12 evento" align="right">(' + evento.dataStringa + ')</p>'+
+						      '</div>'+
+						   '</li>';
+				     $('#lista').append(option);
 		});
+		$('.linkEvento').click(function(e) {localStorage.setItem('evento', JSON.stringify(eventi[$(this).data('idxevento')]));});
 	});
 });

@@ -1,7 +1,13 @@
 var utente = localStorage.getItem('utente');
 if (utente) {
 	utente = JSON.parse(utente);
-	var option = '<li><form id="frmLogin" class="form-inline"><a id = "btnLogin" href= "profilo.html"><label class="lbl" for="email" id= "username" name = "username" style="margin-top: 7px; font-size: 16px;"></label></a></form><li><a href = "relog.html" id = "btnLogout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>'
+	var option = '<li><form id="frmLogin" class="form-inline"><a id = "btnLogin" role="button" id="dropdownMenuLink" ' +
+	' data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'+
+	'<label class="lbl" for="email" id= "username" name = "username" style="margin-top: 7px; font-size: 16px;"></label></a>' +
+	'<div class="dropdown-menu" aria-labelledby="dropdownMenuLink"><a class="dropdown-item" href="profilo.html?username='+utente.username +'">Profilo</a><br>' +
+	'<a class="dropdown-item" href="#">Ricerca Utenti</a><br>'+
+	'<a class="dropdown-item" href="risultati.html">Aggiorna Risultati</a></div></form><li>'+
+	'<a href = "relog.html" id = "btnLogout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>'
 	$('#nav').append(option);
 	$('#username').html(utente.username);
 	$('#hdUsername').val(utente.username);
