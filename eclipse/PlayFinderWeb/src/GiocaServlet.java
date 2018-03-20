@@ -49,7 +49,6 @@ public class GiocaServlet extends HttpServlet {
     	int idSquadra = Integer.parseInt(ids);
 		int idR = Integer.parseInt(idRp);
         int idEvento = Integer.parseInt(id);
-		System.out.println("ciao");
 		Evento e = ge.eventoPerId(idEvento);
 		RuoloPartita rp = ge.ruoloPartitaPerId(idR);
 		Squadra s = ge.squadraPerId(idSquadra);

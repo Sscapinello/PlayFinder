@@ -203,6 +203,5 @@ public class User implements Serializable {
 		this.userInEvento = userInEvento;
 	}
 	
-
-	
+		
 }

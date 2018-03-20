@@ -29,4 +29,11 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>commons-fileupload-1.3.3-bin</name>
+			<type>2</type>
+			<location>C:/Users/alema/Desktop/commons-fileupload-1.3.3-bin</location>
+		</link>
+	</linkedResources>
 </projectDescription>

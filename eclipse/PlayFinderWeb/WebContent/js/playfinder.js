@@ -5,13 +5,17 @@ if (utente) {
 	' data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'+
 	'<label class="lbl" for="email" id= "username" name = "username" style="margin-top: 7px; font-size: 16px;"></label></a>' +
 	'<div class="dropdown-menu" aria-labelledby="dropdownMenuLink"><a class="dropdown-item" href="profilo.html?username='+utente.username +'">Profilo</a><br>' +
-	'<a class="dropdown-item" href="#">Ricerca Utenti</a><br>'+
+	'<a class="dropdown-item" href="cercaUtenti.html">Ricerca Utenti</a><br>'+
 	'<a class="dropdown-item" href="risultati.html">Aggiorna Risultati</a></div></form><li>'+
 	'<a href = "relog.html" id = "btnLogout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>'
 	$('#nav').append(option);
 	$('#username').html(utente.username);
 	$('#hdUsername').val(utente.username);
 	$('#btnLogout').click(function() {
+		var conferma = confirm("Sei sicuro di voler effetuare il logout?");
+		if(conferma){
+			location.href = 'relog.html'
+		}
 		localStorage.removeItem('utente');
 	});
 
@@ -31,7 +35,8 @@ if (utente) {
 				localStorage.setItem('utente', JSON.stringify(esito.oggettoRisultante));
 				location.href ='home.html';
 			} else {
-				$('#pnlErrLogin').show('fast').delay(2000).hide('fast');
+				alert("Username o Password errate");
+				//$('#pnlErrLogin').show('fast').delay(2000).hide('fast');
 			}
 		})
 		.fail(function() {

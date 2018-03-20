@@ -1,7 +1,7 @@
 
 body {
     background-image: none;
-    background-color: highlight;
+    background-color: DarkSeaGreen;
 }
 
 img {
@@ -10,6 +10,13 @@ img {
     margin-right: auto;
     border:5px solid #9d9d9d;
     
+}
+#uploadImmagine{
+	position: relative;
+	display: block;
+	margin-left: auto;
+    margin-right: auto;
+    left: 622px;
 }
 
 .tabs {
@@ -121,6 +128,20 @@ img {
 }
 
 .form-evento{
-	    border: 5px solid red;
-	
+	    border: 5px solid #9d9d9d;
+		border-radius: 8px;
+}
+
+.evento{
+	font-size: 15px;
+}
+.linkEvento{
+	font-size: 20px;
+}
+.data{
+	font-style: italic;
+	font-size: 13px;
+}
+.img-circle {
+    border-radius: 28%;
 }

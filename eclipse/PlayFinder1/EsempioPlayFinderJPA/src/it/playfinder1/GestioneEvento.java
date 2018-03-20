@@ -136,7 +136,7 @@ public class GestioneEvento {
 		int count = 0;
 		UserInEvento x = ge.partecipa(username, evento.getIdEvento());
 		List<UserInEvento> users = evento.getUserInEvento();
-		if (x == null) {
+		if (x != null) {
 			for (UserInEvento usr : users) {
 				String uName = usr.getUser().getUsername();
 				if (uName.equals(username)) {
@@ -148,6 +148,7 @@ public class GestioneEvento {
 					}
 				}
 			}
+		}
 			if (count == 0) {
 				UserInEvento userInEvento = new UserInEvento();
 				userInEvento.nuovoPartecipante(user, evento);
@@ -169,7 +170,7 @@ public class GestioneEvento {
 				em.getTransaction().commit();
 				return true;
 			}
-		}
+		
 		return false;
 	}
 

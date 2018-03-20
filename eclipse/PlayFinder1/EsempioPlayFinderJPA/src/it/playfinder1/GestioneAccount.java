@@ -8,6 +8,8 @@ import javax.persistence.NoResultException;
 
 import it.playfinder.model.Amicizia;
 import it.playfinder.model.Evento;
+import it.playfinder.model.RuoloPartita;
+import it.playfinder.model.Squadra;
 import it.playfinder.model.User;
 import it.playfinder.model.UserInEvento;
 import it.playfinder1.GestioneEvento;;
@@ -48,6 +50,7 @@ public class GestioneAccount {
 		u.setRegione(regione);
 		u.setTelefono(telefono);
 		u.setUsername(username);
+		u.setProfilePicturePath("profileImage/pPicture.png");
 		_return = registrazione(u);
 		return _return;
 
@@ -131,4 +134,53 @@ public class GestioneAccount {
 		}
 		return storico;
 	}
+
+	public int percentualeVittoria(String username) {
+		int percentualeVittoria = 0;
+		int vittorie = 0;
+		int i = 0;
+		User user = userPerUsername(username);
+		List<RuoloPartita> ruoliPartita = user.getRuoliPartite();
+		for (RuoloPartita ruolo : ruoliPartita) {
+			i++;
+			Squadra squadra = ruolo.getSquadra();
+			Evento eventoCasa = squadra.getEventoCasa();
+			Evento eventoTrasferta = squadra.getEventoTrasferta();
+			try {
+				if (eventoCasa != null && eventoCasa.getEsito().equals("1")) {
+					vittorie++;
+				}
+			} catch (NullPointerException e) {
+			}
+			try {
+				if (eventoTrasferta != null && eventoTrasferta.getEsito().equals("2")) {
+					vittorie++;
+				}
+			} catch (NullPointerException e) {
+			}
+
+		}
+		percentualeVittoria = (vittorie * 100) / i;
+		return percentualeVittoria;
+
+	}
+	
+	public void aggiornaImmagine(String indirizzoImmagine, String username) {
+		EntityManager em = EntityFac.getInstance().getEm();
+		em.getTransaction().begin();
+		User user = userPerUsername(username);
+		user.setProfilePicturePath(indirizzoImmagine);
+		em.merge(user);
+		em.getTransaction().commit();
+	}
+	
+	public List<User> listaUtenti(){
+		List<User> utenti = new ArrayList();
+		EntityManager em = EntityFac.getInstance().getEm();
+		em.getTransaction().begin();
+		utenti = em.createQuery("select u from User u", User.class).getResultList();		
+		return utenti;
+		
+	}
+	
 }

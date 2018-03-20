@@ -5,11 +5,22 @@ legend {
 .regi{
 	position: absolute; 
 	display: none;
-    background-color: bisque;
+    background-color: floralwhite;
     margin-left: 500px;
     padding: 10px;
     width: 20%;
     text-align: center;
-    border: 2px solid red;
-    border-radius: 5px;
+    border: 4px solid midnightblue;
+    border-radius: 15px;
+    opacity: 0.9px;
     	}
+#btnsuc{
+	    background-color: midnightblue;
+}
+#success{
+	-webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    z-index: 1000;
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+}
+

@@ -4,13 +4,12 @@
 <meta charset="ISO-8859-1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/playfinder.css">
-<link rel="stylesheet" href="css/home.css">
-<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
-<title>Home</title>
+<link rel="stylesheet" href="css/cercaUtenti.css">
+
+<title>Ricerca utente</title>
 </head>
 <body>
-	<nav class="navbar navbar-inverse">
+    <nav class="navbar navbar-inverse">
 	  <div class="container-fluid">
 	    <div class="navbar-header">
 	      <a class="navbar-brand" href="home.html">PlayFinder</a>
@@ -20,32 +19,34 @@
 		    </ul>
 	  </div>
 	</nav>
-	<div class = "wrapper">
-	  <a type="button" class="btn btn-primary btn-lg" href = "creaEvento.html">Crea il tuo Evento</a>
-	</div>
-  <div class="container-fluid">
+	
+	  <div class="container-fluid">
      <div class="row">
      <div class="col-xl-3 col-lg-1 col-sm-0"></div>
 		<div class="col-xl-6 col-lg-10 col-sm-12 well">
 		    <form class="form-horizontal" id="event_form">
-		    	<legend><center><h2 style = "color : #000000"><b>Eventi</b></h2></center></legend><br>
+		    	<legend><center><h2 style = "color : #000000"><b>Cerca Utenti</b></h2></center></legend><br>
 						    	
+					<form class="form-horizontal" id="event_form">
 						    	
-					<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Ricerca per località.." title="Type in a name">
+					<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Ricerca utente.." title="Type in a name">
 						    	
-						    	
+						    
 							 
 							 
-						 <ul class="form-group" id="listaEventi" >
+						 <ul class="form-group" id="listaUtenti" >
 						 
                         </ul>
+                        </form>
 		    </form>
 		</div>
      </div>
   </div>
+
+</body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="js/playfinder.js"></script>
-<script src="js/home.js"></script>
-</body>
+<script src="js/cercaUtenti.js"></script>
+
 </html>

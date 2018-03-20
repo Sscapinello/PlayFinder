@@ -1,16 +1,40 @@
 var user = localStorage.getItem('utente');
 u = JSON.parse(user);
+$("#usrname").val(u.username);
+$("#usrname").append(u.username);
+var param = getUrlParameter("username");
 
-$(function() {
+console.log(u.userInEvento.length);
+var utente = {};
+utente.username = param;
+$.ajax({
+	url: 'getUser',
+	method: 'post',
+	data: utente
+})
+.done(function(utente){
+var userProfilo = utente;
+
+
+
+if(u.username != param){
+    document.getElementById("uploadImmagine").style.display="none";
+}
+var nomecognome = userProfilo.nome + ' ' + userProfilo.cognome
+$('#nome').append(nomecognome)
 	var x  = {}
-	x.name = u.username
+	x.name = userProfilo.username
 	$.ajax({
 		url: 'storico',
 		method: 'post',
 		data : x
 	})
 	.done(function(storico) {
-		eventi = storico;
+		var eventi = storico;
+		if(userProfilo.profilePicturePath != null){
+		repl = (userProfilo.profilePicturePath);
+		$("#imgProfilo").attr('src', repl);
+	    }
 		$.each(eventi, function(i, evento) {
 			var option = '<li class="form-group">'+
 							'<div class="col-md-12 inputGroupContainer form-evento">' +
@@ -24,11 +48,41 @@ $(function() {
 				                           '<div type="text" class="col-md-1" name="rTrasferta">'+evento.rTrasferta+'</div>' +
 				                           '<div class="col-md-10 evento">'+ evento.squadraTrasferta.nome + '</div>' +
 						            '</div>'+
-						            '<p class="col-md-12 evento" align="right">(' + evento.dataStringa + ')</p>'+
+						            '<p class="col-md-12 data" align="right">(' + evento.dataStringa + ')</p>'+
 						      '</div>'+
 						   '</li>';
 				     $('#lista').append(option);
 		});
 		$('.linkEvento').click(function(e) {localStorage.setItem('evento', JSON.stringify(eventi[$(this).data('idxevento')]));});
+		var numeroEventi = eventi.length;
+		var eventigiocati = 'Numero di eventi giocati : '+ numeroEventi
+		$('#partiteGiocate').append(eventigiocati);
 	});
-});
+
+var x  = {}
+x.username = u.username
+$.ajax({
+	url: 'vittorie',
+	method: 'post',
+	data : x
+})
+.done(function(vittorie) {
+	var percentuale ='Percentuale vittoria: '+ vittorie + '%'
+	$('#profilo').append(percentuale);
+})
+})
+
+function getUrlParameter(sParam) {
+    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : sParameterName[1];
+        }
+    }
+};
