@@ -51,9 +51,22 @@
 	margin-bottom: 3px;
 	
 }
+.campo{
+	    padding-left: 10px;
+	}
 li {
     list-style-type: none;
 }
 #listaUtenti{
 	padding:0px;
+}
+.linkUtente{
+	   padding-left: 0px;
+	
+}
+.nomeCog{
+	display : inline;
+}
+.bottom{
+	margin-bottom: 10px;
 }
