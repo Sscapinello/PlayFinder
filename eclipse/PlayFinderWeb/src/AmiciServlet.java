@@ -1,6 +1,9 @@
 
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,20 +12,21 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import it.playfinder.model.Amicizia;
 import it.playfinder.model.User;
 import it.playfinder1.GestioneAccount;
 
 /**
- * Servlet implementation class GetUserServlet
+ * Servlet implementation class AmiciServlet
  */
-@WebServlet("/getUser")
-public class GetUserServlet extends HttpServlet {
+@WebServlet("/amici")
+public class AmiciServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     GestioneAccount ga = new GestioneAccount();
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetUserServlet() {
+    public AmiciServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,12 +35,11 @@ public class GetUserServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	String username = request.getParameter("username");
-	User user = ga.userPerUsername(username);
-	ObjectMapper m = new ObjectMapper();
-	response.setContentType("application/json");
-	response.getWriter().append(m.writeValueAsString(user));
-
-	}
+		String username = request.getParameter("username");
+		User utente = ga.userPerUsername(username);
+		List<Amicizia> amici = utente.getAmicoDi();
+		ObjectMapper m = new ObjectMapper();
+		response.setContentType("application/json");
+		response.getWriter().append(m.writeValueAsString(amici));	}
 
 }

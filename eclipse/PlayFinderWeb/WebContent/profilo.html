@@ -41,7 +41,7 @@
     </label>
     <!-- Radio button and lable for #tab-content2 -->
     <input type="radio" name="tabs" id="tab2">
-    <label for="tab2">
+    <label id="amici" for="tab2">
         <i class="fa fa-css3"></i><span>Amici</span>
     </label>
     <!-- Radio button and lable for #tab-content3 -->
@@ -55,8 +55,12 @@
         <p id="profilo"></p>
     </div> <!-- #tab-content1 -->
     <div id="tab-content2" class="tab-content">
-        <h3>Amici</h3>
-        <p><!-- Tab content here --></p>
+        <div><h3 id="rich">Richieste Amicizia</h3>
+          <ul id="richieste"></ul>
+        </div>
+        <div><h3>Amici</h3>
+        <ul id="listaAmici"></ul>
+        </div>
     </div> <!-- #tab-content2 -->
     <div id="tab-content3" class="tab-content">
         <form class="form-horizontal" id="event_form">

@@ -55,9 +55,11 @@ public class User implements Serializable {
 	private List<RuoloPartita> ruoliPartite;
 	
 	@OneToMany(mappedBy = "utente2", cascade=CascadeType.ALL)
+	@JsonIgnore
 	private List<Amicizia> amici;
 	
 	@OneToMany(mappedBy = "utente1", cascade=CascadeType.ALL)
+	@JsonIgnore
 	private List<Amicizia> amicoDi;
 	
 	@OneToMany(mappedBy = "user")
@@ -147,6 +149,8 @@ public class User implements Serializable {
 	}
 
 	public List<Amicizia> getAmici() {
+		EntityManager em = EntityFac.getInstance().getEm();
+		em.getEntityManagerFactory().getCache().evictAll();
 		return amici;
 	}
 
@@ -179,8 +183,11 @@ public class User implements Serializable {
 	}
 
 	public List<Amicizia> getAmicoDi() {
+		EntityManager em = EntityFac.getInstance().getEm();
+		em.getEntityManagerFactory().getCache().evictAll();
 		return amicoDi;
 	}
+
 
 	public void setAmicoDi(List<Amicizia> amicoDi) {
 		this.amicoDi = amicoDi;

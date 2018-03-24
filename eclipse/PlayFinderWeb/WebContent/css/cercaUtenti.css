@@ -1,3 +1,7 @@
+body{
+    background-image: none;
+    background-color: highlight;
+}
 #myInput {
   background-image: url("../rsc/search.png");
   background-position: 10px 12px;

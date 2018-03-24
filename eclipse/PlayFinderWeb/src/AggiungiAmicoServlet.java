@@ -7,22 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import it.playfinder1.GestioneAccount;
 
 /**
- * Servlet implementation class VittorieServlet
+ * Servlet implementation class AggiungiAmicoServlet
  */
-@WebServlet("/vittorie")
-public class VittorieServlet extends HttpServlet {
+@WebServlet("/aggiungiAmico")
+public class AggiungiAmicoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
 	GestioneAccount ga = new GestioneAccount();
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public VittorieServlet() {
+    public AggiungiAmicoServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,13 +28,13 @@ public class VittorieServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String username = request.getParameter("username");
-		int percentuale = ga.percentualeVittoria(username);
-		ObjectMapper m = new ObjectMapper();
-		response.setContentType("application/json");
-		response.getWriter().append(m.writeValueAsString(percentuale));
+		String utente = request.getParameter("username");
+		String amico = request.getParameter("amico");
+		ga.aggiungiAmico(utente, amico);
+		
+		
 	}
 
 }

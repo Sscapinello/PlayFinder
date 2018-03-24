@@ -55,7 +55,7 @@ public class GestioneEvento {
 		em.persist(e);
 		em.persist(a);
 		em.getTransaction().commit();
-
+		em.close();
 		return e;
 	}
 
@@ -83,7 +83,7 @@ public class GestioneEvento {
 		em.persist(e);
 		em.persist(a);
 		em.getTransaction().commit();
-
+		em.close();
 		return e;
 	}
 
@@ -93,6 +93,7 @@ public class GestioneEvento {
 			EntityManager em = EntityFac.getInstance().getEm();
 			Query query = em.createQuery("Select s.nomeSport FROM Sport s");
 			sport = query.getResultList();
+			em.close();
 		} catch (NoResultException ex) {
 			ex.printStackTrace();
 		}
@@ -105,6 +106,7 @@ public class GestioneEvento {
 			EntityManager em = EntityFac.getInstance().getEm();
 			Query query = em.createQuery("Select e FROM Evento e");
 			eventi = query.getResultList();
+			em.close();
 		} catch (NoResultException ex) {
 			ex.printStackTrace();
 		}
@@ -133,29 +135,21 @@ public class GestioneEvento {
 		em.getTransaction().begin();
 		Modulo modulo = squadra.getModulo();
 		User user = em.find(User.class, username);
-		int count = 0;
-		UserInEvento x = ge.partecipa(username, evento.getIdEvento());
-		List<UserInEvento> users = evento.getUserInEvento();
-		if (x != null) {
-			for (UserInEvento usr : users) {
-				String uName = usr.getUser().getUsername();
-				if (uName.equals(username)) {
-					count = 1;
-					UserInEvento f = usr;
-					if (squadra.componenti(squadra).size() == 0) {
-						f.setCapitano(true);
-						em.merge(f);
-					}
-				}
-			}
-		}
-			if (count == 0) {
+		boolean x = ge.partecipa2(username, evento.getIdEvento());
+		if (x == false) {
+			if (partecipa(username, evento.getIdEvento()) == null) {
 				UserInEvento userInEvento = new UserInEvento();
 				userInEvento.nuovoPartecipante(user, evento);
 				if (squadra.componenti(squadra).size() == 0) {
 					userInEvento.setCapitano(true);
 				}
 				em.persist(userInEvento);
+			} else {
+				UserInEvento userInEvento = partecipa(username, evento.getIdEvento());
+				if (squadra.componenti(squadra).size() == 0) {
+					userInEvento.setCapitano(true);
+				}
+				em.merge(userInEvento);
 			}
 			int disponibiliModulo = 0;
 			for (GiocatoriRuolo gr : modulo.getGiocatoriruolo()) {
@@ -168,10 +162,23 @@ public class GestioneEvento {
 				ruoloPartita.getUsers().add(user);
 				user.getRuoliPartite().add(ruoloPartita);
 				em.getTransaction().commit();
+				em.close();
 				return true;
 			}
-		
+		}
+		em.close();
 		return false;
+	}
+
+	public int postiDisponibili(Squadra s) {
+		int posti = 0;
+		List<RuoloPartita> rp = s.getRuoli();
+		for (RuoloPartita r : rp) {
+			if (posti == 0) {
+				posti = r.getUsers().size();
+			}
+		}
+		return posti;
 	}
 
 	/*
@@ -206,6 +213,7 @@ public class GestioneEvento {
 		}
 		em.merge(s);
 		em.getTransaction().commit();
+		em.close();
 		return rp;
 
 	}
@@ -222,6 +230,7 @@ public class GestioneEvento {
 			em.remove(e);
 			return true;
 		}
+		em.close();
 		return false;
 	}
 
@@ -231,6 +240,7 @@ public class GestioneEvento {
 			EntityManager em = EntityFac.getInstance().getEm();
 			sport = em.createQuery("select s from Sport s where s.nomeSport=:nomeSport", Sport.class)
 					.setParameter("nomeSport", nomeSport).getSingleResult();
+			em.close();
 		} catch (NoResultException ex) {
 			ex.printStackTrace();
 		}
@@ -243,6 +253,7 @@ public class GestioneEvento {
 			EntityManager em = EntityFac.getInstance().getEm();
 			s = em.createQuery("select s from Squadra s where s.idSquadra=:idSquadra", Squadra.class)
 					.setParameter("idSquadra", idSquadra).getSingleResult();
+			em.close();
 		} catch (NoResultException ex) {
 			ex.printStackTrace();
 		}
@@ -255,6 +266,7 @@ public class GestioneEvento {
 			EntityManager em = EntityFac.getInstance().getEm();
 			e = em.createQuery("select e from Evento e where e.idEvento=:idEvento", Evento.class)
 					.setParameter("idEvento", idEvento).getSingleResult();
+			em.close();
 		} catch (NoResultException ex) {
 			ex.printStackTrace();
 		}
@@ -267,6 +279,7 @@ public class GestioneEvento {
 			EntityManager em = EntityFac.getInstance().getEm();
 			rp = em.createQuery("select r from RuoloPartita r where r.idRuoloPartita=:idRuoloPartita",
 					RuoloPartita.class).setParameter("idRuoloPartita", idRuoloPartita).getSingleResult();
+			em.close();
 		} catch (NoResultException ex) {
 			ex.printStackTrace();
 		}
@@ -288,20 +301,40 @@ public class GestioneEvento {
 		}
 		return userInEvento;
 	}
-	
+
+	public boolean partecipa2(String username, int idEvento) {
+		boolean partecipa = false;
+		EntityManager em = EntityFac.getInstance().getEm();
+		GestioneAccount gestioneAccount = new GestioneAccount();
+		User user = gestioneAccount.userPerUsername(username);
+		List<RuoloPartita> rp = user.getRuoliPartite();
+		for (RuoloPartita r : rp) {
+			if (r.getSquadra().getEventoCasa() != null && r.getSquadra().getEventoCasa().getIdEvento() == idEvento) {
+				partecipa = true;
+			} else if (r.getSquadra().getEventoTrasferta() != null
+					&& r.getSquadra().getEventoTrasferta().getIdEvento() == idEvento) {
+				partecipa = true;
+			}
+		}
+		em.close();
+		return partecipa;
+	}
+
 	public List<Evento> eventiDaAggiornare(User u) {
 		EntityManager em = EntityFac.getInstance().getEm();
 		List<Evento> eventi = new ArrayList();
 		List<UserInEvento> userInEvento = u.getUserInEvento();
-		for(UserInEvento user : userInEvento) {
-			if(user.isAmministratore() && user.getEvento().getTerminato() == true && user.getEvento().getEsito() == null) {
+		for (UserInEvento user : userInEvento) {
+			if (user.isAmministratore() && user.getEvento().getTerminato() == true
+					&& user.getEvento().getEsito() == null) {
 				eventi.add(user.getEvento());
 			}
 		}
+		em.close();
 		return eventi;
-		
+
 	}
-	
+
 	public void settaRisultato(int idEvento, int rCasa, int rTrasferta) {
 		EntityManager em = EntityFac.getInstance().getEm();
 		em.getTransaction().begin();
@@ -311,8 +344,7 @@ public class GestioneEvento {
 		evento.setEsito();
 		em.merge(evento);
 		em.getTransaction().commit();
+		em.close();
 	}
-	
-
 
 }

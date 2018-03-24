@@ -1,4 +1,4 @@
-  var eventi;
+ var eventi;
 var evento = localStorage.getItem('evento');
 if (evento) {
 	localStorage.removeItem('evento');
@@ -25,8 +25,8 @@ $(function() {
 			}
 			var option = '<li class="form-group"><label class="col-md-1 control-label" ></label><div class="col-md-10 inputGroupContainer">' +
 			'<div class="row input-group margine"><span class="input-group-addon"><i class="' +icona +'"style="font-size:40px;"></i></span>' + 
-			'<a data-idxevento="' + i + '" class="col-md-6 evento nEvento linkEvento" href="evento.html?='+ evento.idEvento +'">' 
-				                 + evento.nome + '</a><p align = "right" class="col-md-6 evento squad"style="margin-bottom: 40px;">' + evento.squadraCasa.nome + '-' + evento.squadraTrasferta.nome +
+			'<a data-idxevento="' + i + '" class="col-md-6 evento nEvento linkEvento" href="evento.html?idEvento='+evento.idEvento+'">' + 
+				                evento.nome + '</a><p align = "right" class="col-md-6 evento squad"style="margin-bottom: 40px;">' + evento.squadraCasa.nome + '-' + evento.squadraTrasferta.nome +
 				                '</p><p class="col-md-5 evento">' + evento.sport.nomeSport + 
 								'&nbsp&nbsp&nbsp&nbspDurata:' + evento.durata + '\'' + 
 								'</p><p align = "right" class="col-md-5 evento localita">' + evento.campo.regione + 

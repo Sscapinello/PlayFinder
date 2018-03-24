@@ -1,22 +1,34 @@
 var utente = localStorage.getItem('utente');
 if (utente) {
 	utente = JSON.parse(utente);
-	var option = '<li><form id="frmLogin" class="form-inline"><a id = "btnLogin" role="button" id="dropdownMenuLink" ' +
-	' data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'+
-	'<label class="lbl" for="email" id= "username" name = "username" style="margin-top: 7px; font-size: 16px;"></label></a>' +
-	'<div class="dropdown-menu" aria-labelledby="dropdownMenuLink"><a class="dropdown-item" href="profilo.html?username='+utente.username +'">Profilo</a><br>' +
-	'<a class="dropdown-item" href="cercaUtenti.html">Ricerca Utenti</a><br>'+
-	'<a class="dropdown-item" href="risultati.html">Aggiorna Risultati</a></div></form><li>'+
-	'<a href = "relog.html" id = "btnLogout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>'
+	var option = 	'<li>'+
+			           '<form id="frmLogin" class="form-inline">' +
+		                  '<a id="btnLogin" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'+
+		                     '<label class="lbl" for="email" id="username" name="username" style="margin-top: 7px; font-size: 16px;"></label>'+
+		                  '</a>' +
+		                  '<div class="row dropdown-menu" aria-labelledby="dropdownMenuLink">'+
+		                     '<a class="col-md-12 dropdown-item" href="profilo.html?username='+utente.username +'">Profilo</a>' +
+		                     '<a class="col-md-12 dropdown-item" href="cercaUtenti.html">Ricerca Utenti</a>'+
+		                     '<a class="col-md-12 dropdown-item" href="risultati.html">Aggiorna Risultati</a>'+
+		                  '</div>'+
+		               '</form>'+
+		             '</li>'+
+  		                '<li>'+
+	                       '<a href = "relog.html" id = "btnLogout">'+
+	                          '<span class="glyphicon glyphicon-log-in"></span> Logout'+
+	                       '</a>'+
+	                    '</li>'
 	$('#nav').append(option);
 	$('#username').html(utente.username);
 	$('#hdUsername').val(utente.username);
 	$('#btnLogout').click(function() {
 		var conferma = confirm("Sei sicuro di voler effetuare il logout?");
-		if(conferma){
+		if(conferma==true){
+			localStorage.removeItem('utente');
 			location.href = 'relog.html'
+		}else{
+			location.reload();
 		}
-		localStorage.removeItem('utente');
 	});
 
 } else {
