@@ -4,36 +4,73 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.playfinder.playfinder.MainActivity">
+    tools:context="com.playfinder.playfinder.Login"
+    >
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/usernameText"
         android:layout_width="300dp"
-        android:layout_height="35dp"
-        android:layout_alignParentTop="true"
+        android:layout_height="40dp"
+        android:layout_below="@+id/username"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="94dp"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        tools:layout_editor_absoluteX="85dp"
+        tools:layout_editor_absoluteY="119dp" />
 
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_alignEnd="@+id/editText"
-        android:layout_alignTop="@+id/editText"
-        app:srcCompat="@android:drawable/ic_menu_search" />
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/usernameText"
+        android:layout_marginTop="158dp"
+        android:text="Username"
+        tools:layout_editor_absoluteX="85dp"
+        tools:layout_editor_absoluteY="100dp" />
 
-    <ScrollView
+    <TextView
+        android:id="@+id/password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/usernameText"
+        android:layout_below="@+id/usernameText"
+        android:layout_marginTop="20dp"
+        android:text="Password" />
+
+    <EditText
+        android:id="@+id/passwordText"
         android:layout_width="300dp"
-        android:layout_height="250dp"
-        android:layout_alignStart="@+id/editText"
-        android:layout_centerVertical="true">
+        android:layout_height="40dp"
+        android:layout_alignStart="@+id/password"
+        android:layout_below="@+id/password"
+        android:ems="10"
+        android:inputType="textPassword" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
+    <Button
+        android:id="@+id/accedi"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_alignStart="@+id/passwordText"
+        android:layout_below="@+id/passwordText"
+        android:layout_marginTop="25dp"
+        android:text="Accedi" />
 
+    <TextView
+        android:id="@+id/account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/accedi"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="28dp"
+        android:text="Non hai un account?" />
+
+    <Button
+        android:id="@+id/registrati"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/account"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="26dp"
+        android:text="Registrati" />
 </RelativeLayout>

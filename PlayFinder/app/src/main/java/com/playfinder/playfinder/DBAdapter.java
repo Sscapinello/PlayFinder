@@ -56,7 +56,7 @@ public class DBAdapter {
         return database.rawQuery(buildSQL, null);
     }
     public void insertData (String name, String surname, String username, String email, String password, String città
-    , String età, String regione, String telefono, String ruolo){
+    , String età, String regione, String telefono){
         ContentValues contentValues = new ContentValues();
 
         contentValues.put(KEY_NAME, name);
@@ -68,6 +68,6 @@ public class DBAdapter {
         contentValues.put(KEY_ETA, età);
         contentValues.put(KEY_REGIONE, regione);
         contentValues.put(KEY_TELEFONO, telefono);
-
+        
     }
 }

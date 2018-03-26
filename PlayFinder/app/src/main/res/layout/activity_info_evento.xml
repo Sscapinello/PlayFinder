@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.playfinder.playfinder.FragmentAmici">
+
+    <TextView
+        android:id="@+id/textCalcio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/list2"
+        android:layout_marginTop="24dp"
+        android:text="Calcio a 7"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.068" />
+
+    <TextView
+        android:id="@+id/textTeam1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textTeam2"
+        android:layout_alignBottom="@+id/textTeam2"
+        android:layout_alignEnd="@+id/image2"
+        android:text="Team 1"
+        tools:layout_editor_absoluteX="64dp"
+        tools:layout_editor_absoluteY="65dp" />
+
+    <TextView
+        android:id="@+id/textTeam2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/image1"
+        android:layout_alignStart="@+id/list1"
+        android:layout_marginBottom="20dp"
+        android:layout_marginStart="56dp"
+        android:text="Team 2"
+        tools:layout_editor_absoluteX="264dp"
+        tools:layout_editor_absoluteY="65dp" />
+
+    <ImageView
+        android:id="@+id/image1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/list1"
+        android:layout_alignTop="@+id/image2"
+        android:layout_marginStart="64dp"
+        android:src="@android:drawable/btn_star_big_on"
+        tools:layout_editor_absoluteX="71dp"
+        tools:layout_editor_absoluteY="98dp" />
+
+    <ImageView
+        android:id="@+id/image2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/list2"
+        android:layout_marginBottom="30dp"
+        android:layout_toEndOf="@+id/textCalcio"
+        android:src="@android:drawable/btn_star_big_on"
+        tools:layout_editor_absoluteX="272dp"
+        tools:layout_editor_absoluteY="98dp" />
+
+    <ListView
+        android:id="@+id/list1"
+        android:layout_width="163dp"
+        android:layout_height="287dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/list2"
+        android:layout_marginEnd="17dp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="146dp" />
+
+    <ListView
+        android:id="@+id/list2"
+        android:layout_width="163dp"
+        android:layout_height="287dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="133dp"
+        android:layout_marginStart="18dp"
+        tools:layout_editor_absoluteX="205dp"
+        tools:layout_editor_absoluteY="146dp" />
+
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="500dp"
+        android:layout_height="110dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="20dp" />
+
+
+</RelativeLayout>

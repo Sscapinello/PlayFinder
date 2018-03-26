@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.playfinder.playfinder.Home"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+
+    <ImageButton
+        android:id="@+id/profile"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:src="@mipmap/ic_launcher" />
+
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="35dp"
+        android:layout_below="@id/profile"
+        android:layout_marginTop="19dp"
+        android:layout_toEndOf="@id/profile"
+        android:id="@+id/ricerca" />
+
+    <Button
+        android:id="@+id/creaEvento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/lente"
+        android:layout_marginEnd="59dp"
+        android:layout_toStartOf="@id/lente"
+        android:text="Crea Evento" />
+
+    <ImageButton
+        android:id="@+id/lente"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignEnd="@id/ricerca"
+        android:layout_alignTop="@id/ricerca"
+        android:src="@android:drawable/ic_search_category_default" />
+
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:orientation="vertical"
+        android:layout_below="@id/eventiVari"
+        android:id="@+id/listVari"/>
+
+
+    <ListView
+        android:id="@+id/listVicini"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:orientation="vertical"
+        android:layout_below="@id/eventiVicini"/>
+
+
+    <TextView
+        android:id="@+id/eventiVicini"
+        android:layout_marginTop="30dp"
+        android:layout_width="80dp"
+        android:layout_height="30dp"
+        android:layout_below="@id/ricerca"
+        android:layout_alignParentStart="true"
+        android:text="Eventi Vicini" />
+
+    <TextView
+        android:id="@+id/eventiVari"
+        android:layout_marginTop="50dp"
+        android:layout_width="80dp"
+        android:layout_height="30dp"
+        android:layout_below="@id/listVicini"
+        android:layout_alignParentStart="true"
+        android:text="Altri Eventi" />
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignStart="@id/profile"
+        android:layout_marginStart="60dp"
+        android:text="Username"/>
+</RelativeLayout>

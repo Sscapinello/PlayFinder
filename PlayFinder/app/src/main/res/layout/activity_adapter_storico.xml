@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.playfinder.playfinder.AdapterStorico">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="Squadra1"
+        android:id="@+id/s1" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="190dp"
+        android:layout_alignBaseline="@id/s1"
+        android:textSize="25dp"
+        android:text="vs"
+        android:id="@+id/vs"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/s1"
+        android:layout_marginStart="330dp"
+        android:text="Squadra2"
+        android:id="@+id/s2" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/s1"
+        android:text="Campo:"
+        android:layout_marginStart="20dp"
+        android:id="@+id/field" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/s1"
+        android:layout_marginStart="95dp"
+        android:text="0"
+        android:textSize="20dp"
+        android:id="@+id/rS1"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/field"
+        android:layout_marginStart="80dp"
+        android:text="nameField"
+        android:id="@+id/nField"/>
+
+        <TextView
+            android:id="@+id/rS2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignBaseline="@id/s2"
+            android:layout_marginStart="300dp"
+            android:text="0"
+            android:textSize="20dp" />
+
+</RelativeLayout>

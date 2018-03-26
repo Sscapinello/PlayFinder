@@ -1,46 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.playfinder.playfinder.Registrazione">
 
-    <LinearLayout
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:orientation="vertical">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:context="com.playfinder.playfinder.Registrazione">
 
-        <ScrollView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-            <LinearLayout
+            <ImageView
+                android:id="@+id/imageView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/textView6"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="nome" />
-
-                <EditText
-                    android:id="@+id/editText7"
-                    android:layout_width="295dp"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="textPersonName" />
-            </LinearLayout>
+                android:src="@mipmap/ic_launcher_round" />
 
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/registrati_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
-        </ScrollView>
-    </LinearLayout>
-</RelativeLayout>
+                android:gravity="center"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:text="Registrati:" />
+
+            <TextView
+                android:id="@+id/nome_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nome:" />
+
+            <EditText
+                android:id="@+id/nome"
+                android:layout_width="315dp"
+                android:layout_height="40dp"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/cognome_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cognome:" />
+
+            <EditText
+                android:id="@+id/cognome"
+                android:layout_width="315dp"
+                android:layout_height="40dp"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/eta_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Età:" />
+
+            <EditText
+                android:id="@+id/eta"
+                android:layout_width="315dp"
+                android:layout_height="40dp"
+                android:ems="10"
+                android:inputType="number" />
+
+            <TextView
+                android:id="@+id/citta_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Città:" />
+
+            <EditText
+                android:id="@+id/citta"
+                android:layout_width="315dp"
+                android:layout_height="40dp"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/regione_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Regione:" />
+
+            <EditText
+                android:id="@+id/regione"
+                android:layout_width="315dp"
+                android:layout_height="40dp"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/email_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Email:" />
+
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="315dp"
+                android:layout_height="40dp"
+                android:ems="10"
+                android:inputType="textEmailAddress" />
+
+            <TextView
+                android:id="@+id/telefono_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Telefono:" />
+
+            <EditText
+                android:id="@+id/telefono"
+                android:layout_width="315dp"
+                android:layout_height="40dp"
+                android:ems="10"
+                android:inputType="phone"/>
+
+            <TextView
+                android:id="@+id/username_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Username:" />
+
+            <EditText
+                android:id="@+id/username"
+                android:layout_width="315dp"
+                android:layout_height="40dp"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/password_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Password:" />
+
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="315dp"
+                android:layout_height="40dp"
+                android:ems="10"
+                android:inputType="textPassword"/>
+
+            <TextView
+                android:id="@+id/confpassword_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Conferma Password:" />
+
+            <EditText
+                android:id="@+id/confpassword"
+                android:layout_width="315dp"
+                android:layout_height="40dp"
+                android:ems="10"
+                android:inputType="textPassword"
+                />
+
+            <Button
+                android:id="@+id/registrazione"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Registrati" />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+
+
