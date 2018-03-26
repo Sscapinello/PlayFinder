@@ -15,7 +15,6 @@ $.ajax({
 	url: 'http://localhost:8080/PlayFinderWeb/getEvento?idEvento=' + encodeURI(idEvento),
 	method: 'get',
 }).done(function(e){
-	console.log(e)
 	$('#nomeEvento').append(e.nome);
 	if(e.squadraCasa.modulo == null){
 		selezionec.style.display = 'inline';
@@ -38,18 +37,25 @@ $.ajax({
 				});
 			   $('#btncasa').append('<button class="btn btn-primary imposta ">CREA LA SQUADRA!</button>');
 			   $('.imposta').click(function(j) {
-			        j.preventDefault();
+				    j.preventDefault();
 					var modulo = {}
 					modulo.nomeModulo = $(moduli).val(),
 					modulo.idEvento = e.idEvento,
-					modulo.nomeSquadra = $(nomeCasa).val()
-					$.ajax({
+					modulo.nomeSquadra = $(nomeCasa).val();
+					console.log(modulo.nomeSquadra)
+					if(modulo.nomeModulo == "Seleziona Modulo"){
+						alert("Devi inserire un modulo!");
+					}else if(modulo.nomeSquadra == ""){
+						alert("Devi dare il nome alla tua squadra!");
+					}else{
+					 $.ajax({
 						url: 'moduloCasa',
 						method: 'post',
 						data: modulo
 					}).done(function() {
-						location.reload();
+						window.location.href = 'evento.html?idEvento='+modulo.idEvento;
 					});
+			         }
 				});
 		});
 	}
@@ -81,14 +87,20 @@ $.ajax({
 				var modulo = {}
 				modulo.nomeModulo = $(modulot).val(),
 				modulo.idEvento = e.idEvento,
-				modulo.nomeSquadra = $(nomeTrasferta).val()
+				modulo.nomeSquadra = $(nomeTrasferta).val();
+				if(modulo.nomeModulo == "Seleziona Modulo"){
+					alert("Devi inserire un modulo!");
+				}else if(modulo.nomeSquadra == ""){
+					alert("Devi dare il nome alla tua squadra!");
+				}else{
 				$.ajax({
 					url: 'moduloTrasferta',
 					method: 'post',
 					data: modulo
 				}).done(function(){
-					location.reload();
+					window.location.href = 'evento.html?idEvento='+modulo.idEvento;
 				});
+				}
 			});
 	}
 	if(e.squadraCasa.modulo != null){
@@ -103,8 +115,11 @@ $.ajax({
 			var ruoliPartita = e.squadraCasa.ruoli.filter(r => r && r.ruolo.nome == gg.ruolo.nome);
 			console.log(ruoliPartita);
 			for(var x = 0, l = gg.nGiocatori; x < l; x++) {
-				var nomeRuolo = '<div style="margin-top: 10px;" align="center" class="col-lg-5" name="rp" id="'+gg.ruolo.nome +'">'+gg.ruolo.nome+'</div><div style=" margin-bottom: 10px;"username = "'+u.username+'"idEvento="'+e.idEvento+'" idCasa ="'+ e.squadraCasa.idSquadra +'"idruolo="' + ruoliPartita[0].idRuoloPartita + '" id="'+ id +'" class="col-lg-6 btn btn-primary btnSquadra">' + 
-				(ruoliPartita[0].users.length > x ? ruoliPartita[0].users[x].username : '?') + '</div>' ;
+				var nomeRuolo = '<div style="margin-top: 10px;" align="center" class="col-lg-5" name="rp" id="'+gg.ruolo.nome +'">'+gg.ruolo.nome+'</div>'+
+				                '<div style=" margin-bottom: 10px;"username = "'+(ruoliPartita[0].users.length > x ? ruoliPartita[0].users[x].username : '?')+
+				                     '"idEvento="'+e.idEvento+'" idCasa ="'+ e.squadraCasa.idSquadra +'"idruolo="' + ruoliPartita[0].idRuoloPartita + '"'+
+				                     'id="'+ id +'" class="col-lg-6 btn btn-primary btnSquadra">' +(ruoliPartita[0].users.length > x ? ruoliPartita[0].users[x].username : '?')+ 
+				                '</div>' ;
 				$('#sc').append(nomeRuolo);
 				id++;
 			}
@@ -117,7 +132,9 @@ $.ajax({
 			event.rp = ($(this).attr("idruolo"));
 			event.hdIdEvento = $(this).attr("idEvento")
 			event.idCasa= $(this).attr("idCasa")
-			event.username= $(this).attr("username")
+			ruolo = $(this).attr("username")
+			event.username = u.username
+			if(ruolo == "?"){
 			$.ajax({
 				url: 'gioca',
 				method: 'post',
@@ -125,6 +142,9 @@ $.ajax({
 			}).done(function(){
 				location.reload();
 			})
+			}else{
+				window.location = 'profilo.html?username='+ruolo;
+			}
 			});
 
 	}
@@ -139,7 +159,7 @@ $.ajax({
 			var ruoliPartita = e.squadraTrasferta.ruoli.filter(r => r && r.ruolo.nome == gg.ruolo.nome);
 			for(var x = 0, l = gg.nGiocatori; x < l; x++) {
 				var nomeRuolo = '<div style="margin-top: 10px;" align="center" class="col-lg-5" name="rp" id="'+gg.ruolo.nome+'">'+
-				gg.ruolo.nome+'</div><div style=" margin-bottom: 10px;" username = "'+u.username+'"idEvento="'+e.idEvento
+				gg.ruolo.nome+'</div><div style=" margin-bottom: 10px;" username = "'+(ruoliPartita[0].users.length > x ? ruoliPartita[0].users[x].username : '?')+'"idEvento="'+e.idEvento
 				+'" idCasa ="'+ e.squadraTrasferta.idSquadra +'"idruolo="' + ruoliPartita[0].idRuoloPartita + '"id="ruolo" class="col-lg-6 btn btn-primary btnS">' + 
 				(ruoliPartita[0].users.length > x ? ruoliPartita[0].users[x].username : '?') + '</div>' ;
 				$('#st').append(nomeRuolo);
@@ -152,14 +172,19 @@ $.ajax({
 			event.rp = ($(this).attr("idruolo"));
 			event.hdIdEvento = $(this).attr("idEvento")
 			event.idCasa= $(this).attr("idCasa")
-			event.username= $(this).attr("username")
-			$.ajax({
-				url: 'gioca',
-				method: 'post',
-				data : event,
-			}).done(function(){
-				location.reload();
-			})
+			event.username= u.username
+			ruolo = $(this).attr("username")
+			if(ruolo == "?"){
+				$.ajax({
+					url: 'gioca',
+					method: 'post',
+					data : event,
+				}).done(function(){
+					location.reload();
+				})
+				}else{
+					window.location = 'profilo.html?username='+ruolo;
+				}
 		});}
 });
 

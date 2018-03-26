@@ -1,6 +1,6 @@
 body {
-    background-image: none;
-    background-color: highlight;
+	background-image: url("../rsc/try.png");
+	
 }
 
 img {
@@ -12,7 +12,8 @@ img {
 }
 #myInput {
   background-image: url("../rsc/search.png");
-  background-position: 10px 12px;
+  background-position: 3px 4px;
+  background-size: 37px;
   background-repeat: no-repeat;
   width: 100%;
   font-size: 16px;
@@ -88,4 +89,18 @@ img {
 }
 .well{
 	border-radius: 8px;
+}
+.linkEvento{
+	cursor: pointer;
+}
+.btn-lg{
+	background-color: #333;
+	color: #9d9d9d;
+	border-color: #333;
+	font-weight: 700;
+}
+.btn-lg:hover{
+		color: white;
+		background-color: #333;
+	
 }

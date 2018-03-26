@@ -1,4 +1,4 @@
- var eventi;
+var eventi;
 var evento = localStorage.getItem('evento');
 if (evento) {
 	localStorage.removeItem('evento');
@@ -23,22 +23,50 @@ $(function() {
 			}else if(sport == "Palavolo"){
 				icona = "fas fa-volleyball-ball"
 			}
-			var option = '<li class="form-group"><label class="col-md-1 control-label" ></label><div class="col-md-10 inputGroupContainer">' +
-			'<div class="row input-group margine"><span class="input-group-addon"><i class="' +icona +'"style="font-size:40px;"></i></span>' + 
-			'<a data-idxevento="' + i + '" class="col-md-6 evento nEvento linkEvento" href="evento.html?idEvento='+evento.idEvento+'">' + 
-				                evento.nome + '</a><p align = "right" class="col-md-6 evento squad"style="margin-bottom: 40px;">' + evento.squadraCasa.nome + '-' + evento.squadraTrasferta.nome +
-				                '</p><p class="col-md-5 evento">' + evento.sport.nomeSport + 
-								'&nbsp&nbsp&nbsp&nbspDurata:' + evento.durata + '\'' + 
-								'</p><p align = "right" class="col-md-5 evento localita">' + evento.campo.regione + 
-								',' + evento.campo.citta + ',' + evento.campo.via + ',' + 
-								evento.campo.nCivico +
-								'</p><p class="col-md-2 evento">' + evento.dataStringa + '</p></div></div></li>';
+			if (evento.password != null){
+			var privato = '<i>(privato)</i>'
+			}else{privato = '<i></i>'}
+			var option = '<li class="form-group">'+
+			                 '<label class="col-md-1 control-label"></label>'+
+			                 '<div class="col-md-10 inputGroupContainer">' +
+			                    '<div class="row input-group margine">'+
+			                       '<span class="input-group-addon">'+
+			                          '<i class="' +icona +'"style="font-size:40px;"></i>'+
+			                        '</span>' + 
+			                        '<a data-idxevento="' + i + '" class="col-md-6 evento nEvento linkEvento" password="'+evento.password +
+			                        '" indirizzoEvento="evento.html?idEvento='+evento.idEvento+'">' + evento.nome +' '+ privato +
+				                    '</a>'+
+				                    '<p align = "right" class="col-md-6 evento squad"style="margin-bottom: 40px;">' + evento.squadraCasa.nome + 
+				                    '-' + evento.squadraTrasferta.nome +
+				                    '</p>'+
+				                    '<p class="col-md-5 evento">' + evento.sport.nomeSport + '&nbsp&nbsp&nbsp&nbspDurata:' + evento.durata + '\'' + 
+								    '</p>'+
+								    '<p align = "right" class="col-md-5 evento localita">' + evento.campo.regione + 
+								     ',' + evento.campo.citta + ',' + evento.campo.via + ',' + evento.campo.nCivico +
+								    '</p>'+
+								    '<p class="col-md-2 evento">' + evento.dataStringa + '</p>'+
+								 '</div>'+
+							'</div>'+
+						 '</li>';
             $('#listaEventi').append(option);
 		});
-		$('.linkEvento').click(function(e) {localStorage.setItem('evento', JSON.stringify(eventi[$(this).data('idxevento')]));});
 	});
 
 });
+$(document).on("click",".linkEvento", function () {
+	var password = $(this).attr('password')
+	var indirizzoEvento = $(this).attr('indirizzoEvento')
+	if(password != "null"){
+		if(passCheck(password)){
+			window.location.href = indirizzoEvento;
+		}else{
+			alert("Password Errata!");
+		}
+	}else if(password == "null"){
+		window.location.href = indirizzoEvento;
+	}
+	});
+
 
 function myFunction() {
     var input, filter, ul, li, p, i;
@@ -57,6 +85,16 @@ function myFunction() {
         }
     
     }
+}
+function passCheck(password) {
+    var txt;
+    var check = prompt("Questo evento \u00E8 privato, immetti la password!", "");
+    if (check != password) {
+        return false;
+    } else {
+    	return true;
+    }
+    
 }
 
 

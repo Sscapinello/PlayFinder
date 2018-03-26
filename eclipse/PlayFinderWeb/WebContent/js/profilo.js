@@ -5,12 +5,8 @@ $("#usrname").append(u.username);
 var param = getUrlParameter("username");
 var utente = {};
 utente.username = param;
-
 var username = {}
 username.username = u.username;
-if(u.username != param){
-    document.getElementById("uploadImmagine").style.display="none";
-}
 if(u.username == param){
 	$.ajax({
 		url: 'http://localhost:8080/PlayFinderWeb/richiesteAmicizia?username=' + encodeURI(param),
@@ -82,6 +78,9 @@ if(u.username == param){
 	});
 	
 }else{
+    document.getElementById("uploadImmagine").style.display="none";
+    var buttone = '<button class="btn btn-primary" id="btnRichiesta">Invia Richiesta</button>'
+    $("#inviaRichiesta").append(buttone);
 	var rich = document.getElementById('rich');
 	rich.style.display = 'none';
 	$.ajax({
@@ -150,8 +149,9 @@ $.ajax({
 	data: utente
 }).done(function(utente){
 var userProfilo = utente;
-
 var nomecognome = userProfilo.nome + ' ' + userProfilo.cognome
+	repl = (userProfilo.profilePicturePath);
+	$("#imgProfilo").attr('src', repl);
 $('#nome').append(nomecognome)
 	var x  = {}
 	x.name = userProfilo.username
@@ -159,13 +159,8 @@ $('#nome').append(nomecognome)
 		url: 'storico',
 		method: 'post',
 		data : x
-	})
-	.done(function(storico) {
+	}).done(function(storico) {
 		var eventi = storico;
-		if(userProfilo.profilePicturePath != null){
-		repl = (userProfilo.profilePicturePath);
-		$("#imgProfilo").attr('src', repl);
-	    }
 		$.each(eventi, function(i, evento) {
 			var option = '<li class="form-group">'+
 							'<div class="col-md-12 inputGroupContainer form-evento">' +
@@ -204,6 +199,18 @@ $.ajax({
 	$('#profilo').append(percentuale);
 })
 })
+
+$(document).on('click','#btnRichiesta', function() {
+		var amicizia = {};
+		amicizia.amico = param;
+		amicizia.username = u.username;		
+		$.ajax({
+			url: 'aggiungiAmico',
+			method: 'post',
+			data: amicizia
+		})
+		
+	});
 
 function getUrlParameter(sParam) {
     var sPageURL = decodeURIComponent(window.location.search.substring(1)),

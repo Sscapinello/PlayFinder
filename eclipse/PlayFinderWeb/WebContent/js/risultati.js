@@ -1,7 +1,6 @@
 var user = localStorage.getItem('utente');
 u = JSON.parse(user);
 
-$(function() {
 	var x  = {}
 	x.name = u.username
 	$.ajax({
@@ -19,7 +18,7 @@ $(function() {
 							'<form class="col-md-10 inputGroupContainer form-evento">' +
 								'<div class="row margine">' +
 									'<input type="hidden" name="idEvento" value="'+evento.idEvento+'"></input>'+
-									'<a data-idxevento="'+i+'" class="col-md-12 evento nEvento linkEvento" align="center" href="evento.html?='+ evento.idEvento +'">' + evento.nome + '</a>'+
+									'<a data-idxevento="'+i+'" class="col-md-12 evento nEvento linkEvento" align="center" href="evento.html?idEvento='+ evento.idEvento +'">' + evento.nome + '</a>'+
 									'<p align = "right" class="col-md-5 evento">' + evento.squadraCasa.nome + 
 									   '<input type="text" class="risultato" name="rCasa">'+
 									'</p>'+				                    
@@ -34,15 +33,15 @@ $(function() {
 						   '</li>';
             $('#listaEventi').append(option);
 		});
-		$('.linkEvento').click(function(e) {localStorage.setItem('evento', JSON.stringify(eventi[$(this).data('idxevento')]));});
 	});
 	
-});
 $(document).on('click','.btnRisultato', function() {
 	console.log($(this.form).serialize()),
 	$.ajax({
 			url: 'aggiornaRisultato',
 			method: 'post',
 			data : $(this.form).serialize(),
+		}).done(function(){
+			location.reload();
 		})
 });

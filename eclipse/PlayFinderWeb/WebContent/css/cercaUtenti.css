@@ -1,10 +1,8 @@
-body{
-    background-image: none;
-    background-color: highlight;
-}
+
 #myInput {
   background-image: url("../rsc/search.png");
-  background-position: 10px 12px;
+  background-position: 3px 4px;
+  background-size: 37px;
   background-repeat: no-repeat;
   width: 100%;
   font-size: 16px;

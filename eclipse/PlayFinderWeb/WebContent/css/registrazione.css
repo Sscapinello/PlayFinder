@@ -1,4 +1,9 @@
-
+body{
+	background-image: url("../rsc/ap4.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	
+}
 legend {
 	border-bottom: 0;
 }

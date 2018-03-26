@@ -1,10 +1,31 @@
- <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<link rel="shortcut icon" type="image/x-icon" href="rsc/playfinder_ico.png" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/playfinder.css">
+<title>Aggiorna Dati</title>
 </head>
 <body>
-
+	<nav class="navbar navbar-inverse">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <a class="navbar-brand" href="home.html">PlayFinder</a>
+	    </div>
+	    <ul class="nav navbar-nav navbar-right" id ="nav">
+		</ul>
+	  </div>
+	</nav>
+           
+    <form align="center" id="uploadImmagine" enctype="multipart/form-data">
+		<input type="file" id="file" name="image" class="inputfile" size="1200">
+		   <label class="btn myL" for="file">Scegli l'immagine</label>
+	    <input type="hidden" id="usrname" name="username">
+	</form>
+	<button class="btn-primary" id="btnPirla"></button>
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="js/playfinder.js"></script>
+<script src="js/modificaProfilo.js"></script>
 </html>

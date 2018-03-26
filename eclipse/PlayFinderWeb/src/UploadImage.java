@@ -66,7 +66,7 @@ public class UploadImage extends HttpServlet {
 			out.println("<title>Servlet upload</title>");
 			out.println("</head>");
 			out.println("<body>");
-			out.println("<p>No file uploaded</p>");
+			out.println("<p>Non hai selezionato nessuna immagine</p>");
 			out.println("</body>");
 			out.println("</html>");
 			return;
@@ -93,11 +93,7 @@ public class UploadImage extends HttpServlet {
 			// Process the uploaded file items
 			Iterator i = fileItems.iterator();
 
-			out.println("<html>");
-			out.println("<head>");
-			out.println("<title>Servlet upload</title>");
-			out.println("</head>");
-			out.println("<body>");
+			
 
 			while (i.hasNext()) {
 				
@@ -122,18 +118,18 @@ public class UploadImage extends HttpServlet {
 						file = new File(filePath + fileName.substring(fileName.lastIndexOf("\\") + 1));
 					}
 					fi.write(file);
-					out.println("Uploaded Filename: " + fileName + "<br>");
 					indirizzo = "profileImage/" + fileName;
 
 			}
 			
-			out.println("</body>");
-			out.println("</html>");
+			
 			}} catch (Exception ex) {
 			System.out.println(ex);
 		}
 
 			ga.aggiornaImmagine(indirizzo, username);
+			response.sendRedirect("profilo.html?username=" + username);
+
 
 	}
 }

@@ -84,31 +84,38 @@ public class GestioneAccount {
 
 	public void aggiungiAmico(String usernameUtente, String usernameAmico) {
 		EntityManager em = EntityFac.getInstance().getEm();
+		em.getTransaction().begin();
 		User u = em.find(User.class, usernameUtente);
 		User amico = em.find(User.class, usernameAmico);
 		boolean bho = false;
-		em.getTransaction().begin();
 		List<Amicizia> amici = u.getAmici();
-		for(Amicizia a : amici) {
+		for (Amicizia a : amici) {
 			String mbare = a.getUtente1().getUsername();
-			if(mbare.equals(usernameAmico)) {
+			if (mbare.equals(usernameAmico)) {
 				bho = true;
 			}
 		}
-		List<Amicizia> amicibis = amico.getAmicoDi();
-		for(Amicizia a : amicibis) {
+		List<Amicizia> amicibis = u.getAmicoDi();
+		for (Amicizia a : amicibis) {
 			String mbare = a.getUtente2().getUsername();
-			if(mbare.equals(usernameAmico)) {
+			if (mbare.equals(usernameAmico)) {
 				bho = true;
 			}
 		}
 		List<Amicizia> amicitris = amico.getAmici();
-		for(Amicizia a : amicitris) {
+		for (Amicizia a : amicitris) {
 			String mbare = a.getUtente1().getUsername();
-			if(mbare.equals(usernameAmico)) {
+			if (mbare.equals(usernameUtente)) {
 				bho = true;
 			}
 		}
+		List<Amicizia> amiciQuatt = amico.getAmicoDi();
+		for (Amicizia a : amiciQuatt) {
+			String mbare = a.getUtente1().getUsername();
+			if (mbare.equals(usernameUtente)) {
+				bho = true;
+			}
+		}		
 		if (u != null && amico != null && bho == false) {
 			u.addAmico(amico, false);
 		}
@@ -124,13 +131,13 @@ public class GestioneAccount {
 		em.getTransaction().commit();
 		em.close();
 	}
-	
+
 	public Amicizia amiciziaPerId(int idAmicizia) {
 		EntityManager em = EntityFac.getInstance().getEm();
 		Amicizia amicizia = em.find(Amicizia.class, idAmicizia);
 		em.close();
 		return amicizia;
-	
+
 	}
 
 	public User userPerUsername(String username) {
@@ -150,8 +157,8 @@ public class GestioneAccount {
 	public void rimuoviAmicizia(Amicizia amicizia) {
 		EntityManager em = EntityFac.getInstance().getEm();
 		em.getTransaction().begin();
-	    Amicizia amico = em.merge(amicizia);
-	    em.remove(amico);
+		Amicizia amico = em.merge(amicizia);
+		em.remove(amico);
 		em.getTransaction().commit();
 		em.close();
 	}
@@ -166,7 +173,7 @@ public class GestioneAccount {
 				storico.add(evento);
 			}
 		}
-		
+
 		return storico;
 
 	}
@@ -178,29 +185,37 @@ public class GestioneAccount {
 		User user = userPerUsername(username);
 		List<RuoloPartita> ruoliPartita = user.getRuoliPartite();
 		for (RuoloPartita ruolo : ruoliPartita) {
-			i++;
 			Squadra squadra = ruolo.getSquadra();
 			Evento eventoCasa = squadra.getEventoCasa();
 			Evento eventoTrasferta = squadra.getEventoTrasferta();
-			try {
-				if (eventoCasa != null && eventoCasa.getEsito().equals("1")) {
-					vittorie++;
+			if (eventoCasa != null) {
+				if(eventoCasa.getTerminato() == true) {
+					i++;
 				}
-			} catch (NullPointerException e) {
-			}
-			try {
-				if (eventoTrasferta != null && eventoTrasferta.getEsito().equals("2")) {
-					vittorie++;
+				if (eventoCasa.getEsito() != null) {
+					if (eventoCasa.getEsito().equals("1")) {
+						vittorie++;
+					}
 				}
-			} catch (NullPointerException e) {
 			}
-
+			if (eventoTrasferta != null) {
+				if(eventoTrasferta.getTerminato() == true) {
+					i++;
+				}
+				if (eventoTrasferta.getEsito() != null) {
+					if (eventoTrasferta.getEsito().equals("2")) {
+						vittorie++;
+					}
+				}
+			}
 		}
-		percentualeVittoria = (vittorie * 100) / i;
+		if (i != 0) {
+			percentualeVittoria = (vittorie * 100) / i;
+		}
 		return percentualeVittoria;
 
 	}
-	
+
 	public void aggiornaImmagine(String indirizzoImmagine, String username) {
 		EntityManager em = EntityFac.getInstance().getEm();
 		em.getTransaction().begin();
@@ -210,15 +225,52 @@ public class GestioneAccount {
 		em.getTransaction().commit();
 		em.close();
 	}
-	
-	public List<User> listaUtenti(){
+
+	public List<User> listaUtenti() {
 		List<User> utenti = new ArrayList();
 		EntityManager em = EntityFac.getInstance().getEm();
 		em.getTransaction().begin();
 		utenti = em.createQuery("select u from User u", User.class).getResultList();
 		em.close();
 		return utenti;
-		
+
 	}
-	
+
+	public void modificaDati(String username, String email, String password, String nome, String cognome, String citta,
+			String eta, String regione, String telefono, String profilePicturePath) {
+		EntityManager em = EntityFac.getInstance().getEm();
+		em.getTransaction().begin();
+		User u = em.find(User.class, username);
+		if (cognome != null) {
+			u.setCognome(cognome);
+		}
+		if (citta != null) {
+			u.setCitta(citta);
+		}
+		if (email != null) {
+			u.setEmail(email);
+		}
+		if (eta != null) {
+			u.setEta(Integer.parseInt(eta));
+		}
+		if (nome != null) {
+			u.setNome(nome);
+		}
+		if (password != null) {
+			u.setPassword(password);
+		}
+		if (regione != null) {
+			u.setRegione(regione);
+		}
+		if (telefono != null) {
+			u.setTelefono(telefono);
+		}
+		if (profilePicturePath != null) {
+			u.setProfilePicturePath(profilePicturePath);
+		}
+		em.merge(u);
+		em.getTransaction().commit();
+		em.close();
+	}
+
 }

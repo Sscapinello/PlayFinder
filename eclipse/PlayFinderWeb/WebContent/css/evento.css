@@ -1,7 +1,3 @@
-body {
-    background-image: none;
-    background-color: highlight;
-}
 
 img {
     display: block;
@@ -12,11 +8,17 @@ img {
 }
 
 .btnSquadra, .btnS{
-	
-	padding: 10px 90px;
+	background-color: #F3C45B;
+	border:2px solid black;
+	color:black;
+	padding: 10px 0px;
     font-size: 18px;
     line-height: 1.3333333;
     border-radius: 6px;
+}
+.btnSquadra:hover, .btnS:hover{
+    background-color: black;
+	color : white;
 }
 
 .my-group .form-control{

@@ -13,11 +13,11 @@ if (utente) {
 		                  '</div>'+
 		               '</form>'+
 		             '</li>'+
-  		                '<li>'+
-	                       '<a href = "relog.html" id = "btnLogout">'+
-	                          '<span class="glyphicon glyphicon-log-in"></span> Logout'+
-	                       '</a>'+
-	                    '</li>'
+  		             '<li>'+
+	                   '<a id = "btnLogout">'+
+	                      '<span class="glyphicon glyphicon-log-in"></span> Logout'+
+	                   '</a>'+
+	                 '</li>'
 	$('#nav').append(option);
 	$('#username').html(utente.username);
 	$('#hdUsername').val(utente.username);
@@ -25,9 +25,7 @@ if (utente) {
 		var conferma = confirm("Sei sicuro di voler effetuare il logout?");
 		if(conferma==true){
 			localStorage.removeItem('utente');
-			location.href = 'relog.html'
-		}else{
-			location.reload();
+			window.location.href = 'relog.html';
 		}
 	});
 

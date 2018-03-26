@@ -30,7 +30,6 @@ public class GestioneEvento {
 		Squadra casa = new Squadra();
 		Squadra trasferta = new Squadra();
 		Evento e = new Evento();
-		// Modulo m = moduloDefault(sport);
 		e.setCampo(campo);
 		e.setDurata(durata);
 		e.setSport(em.find(Sport.class, sport.getNomeSport()));
@@ -41,17 +40,9 @@ public class GestioneEvento {
 		trasferta.creaSquadra("Team 2");
 		e.setSquadraCasa(casa);
 		e.setSquadraTrasferta(trasferta);
-		// casa.setModulo(m);
-		// trasferta.setModulo(m);
 		UserInEvento a = new UserInEvento();
 		a.nuovoPartecipante(u, e);
 		a.setAmministratore(true);
-		// List<RuoloPartita> x = settaModulo(m, casa);
-		// List<RuoloPartita> y = settaModulo(m, trasferta);
-		/*
-		 * for(RuoloPartita r : x) { em.persist(r); } for(RuoloPartita r : y) {
-		 * em.persist(r); }
-		 */
 		em.persist(e);
 		em.persist(a);
 		em.getTransaction().commit();
@@ -162,10 +153,12 @@ public class GestioneEvento {
 				ruoloPartita.getUsers().add(user);
 				user.getRuoliPartite().add(ruoloPartita);
 				em.getTransaction().commit();
+				em.getEntityManagerFactory().getCache().evictAll();
 				em.close();
 				return true;
 			}
 		}
+		em.getEntityManagerFactory().getCache().evictAll();
 		em.close();
 		return false;
 	}
@@ -322,6 +315,7 @@ public class GestioneEvento {
 
 	public List<Evento> eventiDaAggiornare(User u) {
 		EntityManager em = EntityFac.getInstance().getEm();
+		em.getEntityManagerFactory().getCache().evictAll();
 		List<Evento> eventi = new ArrayList();
 		List<UserInEvento> userInEvento = u.getUserInEvento();
 		for (UserInEvento user : userInEvento) {

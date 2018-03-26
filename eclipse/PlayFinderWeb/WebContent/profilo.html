@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<link rel="shortcut icon" type="image/x-icon" href="rsc/playfinder_ico.jpg" />
+<link rel="shortcut icon" type="image/x-icon" href="rsc/playfinder_ico.png" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/playfinder.css">
 <link rel="stylesheet" href="css/profilo.css">
@@ -23,20 +23,22 @@
     <div class="container-fluid">
 		       
         <div class="row">
-   	            <img src="profileImage/pPicture.png" id="imgProfilo" class="img-circle" width="200" height="200">
-	   	        <form align="center" id="uploadImmagine" action="UploadImage" method="post" enctype="multipart/form-data">
+   	            <img src="" id="imgProfilo" class="img-circle" width="200" height="200">
+   	            <div id="inviaRichiesta">
+   	            <form align="center" id="uploadImmagine" action="UploadImage" method="post" enctype="multipart/form-data">
 				   <input type="file" id="file" name="image" class="inputfile" size="1200">
-				   <label class="btn" for="file">Choose a file</label>
+				   <label class="btn myL" for="file">Scegli l'immagine</label>
 				   <input type="hidden" id="usrname" name="username">
-				   <button type="submit" class="btn"></button>
-			   </form>
+				   <button type="submit" class="btn invio" href="#">Invia!!</button>
+			   </form></div>
+	   	        
         <div class="tabs">
     
     <input name="username" id="hdUsername" type="hidden">
         
     <!-- Radio button and lable for #tab-content1 -->
     <input type="radio" name="tabs" id="tab1" checked >
-    <label for="tab1">
+    <label for="tab1" id="leftRad">
         <i class="fa fa-html5"></i><span>Profilo</span>
     </label>
     <!-- Radio button and lable for #tab-content2 -->
@@ -46,7 +48,7 @@
     </label>
     <!-- Radio button and lable for #tab-content3 -->
     <input type="radio" name="tabs" id="tab3">
-    <label for="tab3">
+    <label for="tab3" id="rightRad">
         <i class="fa fa-code"></i><span>Storico</span>
     </label>
     <div id="tab-content1" class="tab-content">
